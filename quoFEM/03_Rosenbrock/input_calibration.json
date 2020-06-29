@@ -1,0 +1,63 @@
+{
+    "Applications": {
+        "UQ": {
+            "Application": "Dakota-UQ",
+            "ApplicationData": {
+            }
+        }
+    },
+    "EDP": [
+        {
+            "name": "f"
+        }
+    ],
+    "UQ_Method": {
+        "calibrationMethodData": {
+            "convergenceTol": 1e-10,
+            "factors": "",
+            "maxIterations": 100,
+            "method": "NL2SOL"
+        },
+        "uqEngine": "Dakota",
+        "uqType": "Parameters Estimation"
+    },
+    "fem": {
+        "dir": "{Current_Dir}/.",
+        "inputFile": "{Current_Dir}/rosenbrock.py",
+        "mainInput": "rosenbrock.py",
+        "mainPostprocessScript": "",
+        "numInputs": 1,
+        "parametersFile": "params.py",
+        "parametersScript": "{Current_Dir}/params.py",
+        "postprocessScript": "",
+        "program": "OpenSeesPy"
+    },
+    "localAppDir": "C:/Tools/quoFEM/quoFEM",
+    "python": "python",
+    "randomVariables": [
+        {
+            "distribution": "ContinuousDesign",
+            "initialpoint": -1,
+            "lowerbound": -2,
+            "name": "x",
+            "refCount": 1,
+            "upperbound": 2,
+            "value": "RV.x",
+            "variableClass": "Design"
+        },
+        {
+            "distribution": "ContinuousDesign",
+            "initialpoint": -1,
+            "lowerbound": -2,
+            "name": "y",
+            "refCount": 1,
+            "upperbound": 2,
+            "value": "RV.y",
+            "variableClass": "Design"
+        }
+    ],
+    "remoteAppDir": "/home1/00477/tg457427/SimCenterBackendApplications/May-2020",
+    "uqResults": {
+    },
+    "workingDir": "C:/Workdir/quoFEM"
+}
