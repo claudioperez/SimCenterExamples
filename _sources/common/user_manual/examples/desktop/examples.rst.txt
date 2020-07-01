@@ -6,7 +6,7 @@ Examples
 
 .. only:: quoFEM_app
 
-	The following are a few examples showing the usage of quoFEM. Video companions showing these examples are also provided. The files for the examples are available in github.
+	The following are a few examples showing the usage of quoFEM. Video companions showing these examples are also provided for select problems. The files for the examples are available in github.
 
 .. only:: EEUQ_app
 

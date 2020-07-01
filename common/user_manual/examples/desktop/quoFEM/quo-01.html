@@ -218,27 +218,15 @@ This script will accept as input any of the 6 nodes in the domain and for each o
 <ol class="arabic simple">
 <li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota, and the UQ Method Category as Forward Propagation, and the Forward Propagation method as LHS (Latin Hypercube). Change the #samples to 1000 and the seed to 20 as shown in the figure.</p></li>
 </ol>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussUQ.png" src="../../../../../_images/trussUQ.png" />
-</div>
 <ol class="arabic simple" start="2">
 <li><p>Next select the FEM tab from the input panel. This will default in the OpenSees FEM engine. For the main script copy the path name to TrussSelection.tcl or select choose and navigate to the file. For the postprocess script, repeat the same procedure for the postprocess.tcl script.</p></li>
 </ol>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussFEM.png" src="../../../../../_images/trussFEM.png" />
-</div>
 <ol class="arabic simple" start="3">
 <li><p>Next select the RV tab from the input panel. This should be pre-populated with four random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script. For each variable, from the drop down menu change them from having a constant distribution to a normal one and then provide the means and standard deviations specified for the problem.</p></li>
 </ol>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussRV.png" src="../../../../../_images/trussRV.png" />
-</div>
 <ol class="arabic simple" start="4">
 <li><p>Next select the QoI panel. Here enter ‘Node_3_Disp_2’ for the one variable.</p></li>
 </ol>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussQoI.png" src="../../../../../_images/trussQoI.png" />
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The user can add additional QoI by selecting add and then providing additional names. As seen from the postprocess script any of the 6 nodes may be specified and for any node either the 1 or 2 dof direction.</p>
@@ -246,9 +234,6 @@ This script will accept as input any of the 6 nodes in the domain and for each o
 <ol class="arabic simple" start="5">
 <li><p>Next click on the ‘Run’ button. This will cause the backend application to launch dakota. When done the RES panel tab will be selected and the results will be displayed. The results show the values the mean and standard deviation.</p></li>
 </ol>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussRES1.png" src="../../../../../_images/trussRES1.png" />
-</div>
 </div>
 <div class="section" id="post-processing">
 <h2><span class="section-number">6.1.2. </span>Post-processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h2>
