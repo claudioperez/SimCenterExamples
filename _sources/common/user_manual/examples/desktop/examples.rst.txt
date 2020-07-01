@@ -29,7 +29,6 @@ Examples
    :quoFEM:quoFEM/quo-06
    :quoFEM:quoFEM/quo-07
    :quoFEM:quoFEM/quo-08
-   :quoFEM:quoFEM/FramePeriod
    :EEUQ:EEUQ/ShearBuilding3
    :PBE:PBE/basic_HAZUS
    :PBE:PBE/basic_P58

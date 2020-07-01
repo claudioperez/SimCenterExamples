@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.3. Reliability &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.8. |quo-08| &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="6.4. Sensitivity" href="quo-04.html" />
-    <link rel="prev" title="6.2. Forward Propagation - OpenSeesPy" href="quo-02.html" /> 
+    <link rel="next" title="6.9. Steel Frame: Parameter Estimation" href="FramePeriod.html" />
+    <link rel="prev" title="6.7. Conventional Estimation - Steel Frame" href="quo-07.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,15 +95,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quo-01.html">6.1. Forward Propagation - OpenSees/Tcl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.2. Forward Propagation - OpenSeesPy</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Reliability</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#global-sensitivity">6.3.1. Global Sensitivity</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.3. Reliability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Arbitrary Python Scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Estimation - Rosembrock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Estimation - Steel Frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. |quo-08|</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.8. |quo-08|</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FramePeriod.html">6.9. Steel Frame: Parameter Estimation</a></li>
 </ul>
 </li>
@@ -168,13 +165,13 @@
         
           <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
         
-      <li><span class="section-number">6.3. </span>Reliability</li>
+      <li><span class="section-number">6.8. </span>|quo-08|</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/quo-03.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/quo-08.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,28 +184,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quo-03">
-<h1><span class="section-number">6.3. </span>Reliability<a class="headerlink" href="#quo-03" title="Permalink to this headline">¶</a></h1>
-<p>If the user is interested in the probability that a particular response measure will be exceeded, an alternate strategy is to perform a reliability analysis. In order to perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSORM-UQ.png" src="../../../../../_images/trussSORM-UQ.png" />
-</div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSORM-RES.png" src="../../../../../_images/trussSORM-RES.png" />
-</div>
-<div class="section" id="global-sensitivity">
-<h2><span class="section-number">6.3.1. </span>Global Sensitivity<a class="headerlink" href="#global-sensitivity" title="Permalink to this headline">¶</a></h2>
-<p>In a global sensitivity analysis the user is wishing to understand what is the influence of the individual random variables on the quantities of interest. This is typically done before the user launches large scale forward uncertainty problems in order to limit the number of random variables used so as to limit the number of simulations performed.</p>
-<p>To perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSens-UQ.png" src="../../../../../_images/trussSens-UQ.png" />
-</div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSensitivity-RES.png" src="../../../../../_images/trussSensitivity-RES.png" />
-</div>
-</div>
+  <div class="section" id="quo-08">
+<h1><span class="section-number">6.8. </span><a href="#id1"><span class="problematic" id="id2">|quo-08|</span></a><a class="headerlink" href="#quo-08" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

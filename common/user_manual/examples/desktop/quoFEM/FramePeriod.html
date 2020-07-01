@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.8. Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.9. Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="7. Bugs &amp; Feature Requests" href="../../../bugs.html" />
-    <link rel="prev" title="6.7. Conventional Estimation - Steel Frame" href="quo-07.html" /> 
+    <link rel="prev" title="6.8. |quo-08|" href="quo-08.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,7 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Arbitrary Python Scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Estimation - Rosembrock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Estimation - Steel Frame</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.8. Steel Frame: Parameter Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. |quo-08|</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.9. Steel Frame: Parameter Estimation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
@@ -164,7 +165,7 @@
         
           <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
         
-      <li><span class="section-number">6.8. </span>Steel Frame: Parameter Estimation</li>
+      <li><span class="section-number">6.9. </span>Steel Frame: Parameter Estimation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -184,11 +185,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="steel-frame-parameter-estimation">
-<h1><span class="section-number">6.8. </span>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
-<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <a class="reference internal" href="quo-07.html#lbljoelframe"><span class="std std-numref">Fig. 6.7.1</span></a>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
+<h1><span class="section-number">6.9. </span>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
+<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">lblJoelFrame</span></code>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
 <div class="align-center figure" id="id1">
 <span id="lbljoelframe"></span><a class="reference internal image-reference" href="../../../../../_images/joelFrame.png"><img alt="../../../../../_images/joelFrame.png" src="../../../../../_images/joelFrame.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.8.1 </span><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.9.1 </span><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantaties, m1 and m2, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:</p>
 <table class="colwidths-given docutils align-default">
