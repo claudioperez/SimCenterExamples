@@ -14,10 +14,10 @@ Consider the problem of uncertainty quantification in a two-dimensional truss st
 
 The structure has uncertain properties that all follow a normal distribution as follows:
 
-1. Elastic modulus(E): mean :math:`\mu_E=205 \mathrm{ kN}/\mathrm{mm}^2` and standard deviation :math:`\sigma_E =15 \mathrm{ kN}/\mathrm{mm}^2` (COV = 7.3%)
-2. Load (P): mean :math:`\mu_P =25 kN` and a standard deviation of :math:`\sigma_P = 3 \mathrm{ kN}`, (COV = 12%).
-3. Cross sectional area for the upper three bars (Au): mean :math:`\mu_{Au} = 500 \mathrm{mm}^2`, and a standard deviation of :math:`\sigma_{Au} = 25\mathrm{mm}^2`  (COV = 5%)
-4. Cross sectional area for the other six bars (Ao): mean :math:`\mu_{Ao} = 250 \mathrm{mm}^2`, and :math:`\sigma_{Ao} = 10\mathrm{mm}^2` (COV = 4%)
+1. Elastic modulus (``E``): mean :math:`\mu_E=205 \mathrm{ kN}/\mathrm{mm}^2` and standard deviation :math:`\sigma_E =15 \mathrm{ kN}/\mathrm{mm}^2` (COV = 7.3%)
+2. Load (``P``): mean :math:`\mu_P =25 kN` and a standard deviation of :math:`\sigma_P = 3 \mathrm{ kN}`, (COV = 12%).
+3. Cross sectional area for the upper three bars (``Au``): mean :math:`\mu_{Au} = 500 \mathrm{mm}^2`, and a standard deviation of :math:`\sigma_{Au} = 25\mathrm{mm}^2`  (COV = 5%)
+4. Cross sectional area for the other six bars (``Ao``): mean :math:`\mu_{Ao} = 250 \mathrm{mm}^2`, and :math:`\sigma_{Ao} = 10\mathrm{mm}^2` (COV = 4%)
 
 Two input files are used to define a forward propagation procedure with quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Monte-Carlo simulation. The relevant problem files may be downloaded from **LINK**
 

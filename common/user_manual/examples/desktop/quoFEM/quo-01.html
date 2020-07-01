@@ -102,9 +102,9 @@
 <li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.3. Reliability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Arbitrary Python Scripts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Estimation - Rosembrock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Estimation - Steel Frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Baysian Estimation - Steel Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Calibration - Rosembrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
@@ -196,10 +196,10 @@
 </div>
 <p>The structure has uncertain properties that all follow a normal distribution as follows:</p>
 <ol class="arabic simple">
-<li><p>Elastic modulus(E): mean <span class="math notranslate nohighlight">\(\mu_E=205 \mathrm{ kN}/\mathrm{mm}^2\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma_E =15 \mathrm{ kN}/\mathrm{mm}^2\)</span> (COV = 7.3%)</p></li>
-<li><p>Load (P): mean <span class="math notranslate nohighlight">\(\mu_P =25 kN\)</span> and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_P = 3 \mathrm{ kN}\)</span>, (COV = 12%).</p></li>
-<li><p>Cross sectional area for the upper three bars (Au): mean <span class="math notranslate nohighlight">\(\mu_{Au} = 500 \mathrm{mm}^2\)</span>, and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_{Au} = 25\mathrm{mm}^2\)</span>  (COV = 5%)</p></li>
-<li><p>Cross sectional area for the other six bars (Ao): mean <span class="math notranslate nohighlight">\(\mu_{Ao} = 250 \mathrm{mm}^2\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{Ao} = 10\mathrm{mm}^2\)</span> (COV = 4%)</p></li>
+<li><p>Elastic modulus (<code class="docutils literal notranslate"><span class="pre">E</span></code>): mean <span class="math notranslate nohighlight">\(\mu_E=205 \mathrm{ kN}/\mathrm{mm}^2\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma_E =15 \mathrm{ kN}/\mathrm{mm}^2\)</span> (COV = 7.3%)</p></li>
+<li><p>Load (<code class="docutils literal notranslate"><span class="pre">P</span></code>): mean <span class="math notranslate nohighlight">\(\mu_P =25 kN\)</span> and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_P = 3 \mathrm{ kN}\)</span>, (COV = 12%).</p></li>
+<li><p>Cross sectional area for the upper three bars (<code class="docutils literal notranslate"><span class="pre">Au</span></code>): mean <span class="math notranslate nohighlight">\(\mu_{Au} = 500 \mathrm{mm}^2\)</span>, and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_{Au} = 25\mathrm{mm}^2\)</span>  (COV = 5%)</p></li>
+<li><p>Cross sectional area for the other six bars (<code class="docutils literal notranslate"><span class="pre">Ao</span></code>): mean <span class="math notranslate nohighlight">\(\mu_{Ao} = 250 \mathrm{mm}^2\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{Ao} = 10\mathrm{mm}^2\)</span> (COV = 4%)</p></li>
 </ol>
 <p>Two input files are used to define a forward propagation procedure with quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Monte-Carlo simulation. The relevant problem files may be downloaded from <strong>LINK</strong></p>
 <div class="section" id="pre-processing">
