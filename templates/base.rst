@@ -1,3 +1,6 @@
+{% macro sentence_case(text) %}{{ text[0]|upper}}{{text[1:]}}{% endmacro %}
+
+
 {{ page.title }}
 ============================================================
 
@@ -11,15 +14,16 @@
 
 The following problem variables are modeled as uncertain parameters:
 
-{% for rvar in page.input.randomVariables -%}
-#. ``{{ rvar.name }}``
+{% for rvar in page.rvars -%}
+#. {{ sentence_case(rvar.title) }}, ``{{ rvar.name }}``: {{ rvar.distribution }} distribution with a {% for param in rvar.params %} {{ param.title }} :math:`({{ param.tex }})` of {{ param.value }}, {% endfor %}.
 
 {% endfor %}
 
+{% if page.docs.workflow %}
 Problem Workflow
 ^^^^^^^^^^^^^^^^
 
-Workflow
+{% endif %}
 
 Model Definition
 ^^^^^^^^^^^^^^^^

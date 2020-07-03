@@ -1,0 +1,30 @@
+{
+    "$schema": "https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json",
+
+    "UQ_Method": {
+        "uqEngine": "Dakota"
+    },
+
+    "fem": {
+        "dir": "{Current_Dir}/.",
+        "inputFile": "{Current_Dir}/model.tcl",
+        "mainInput": "model.tcl",
+        "mainPostprocessScript": "post.tcl",
+        "numInputs": 1,
+        "postprocessScript": "{Current_Dir}/post.tcl",
+        "program": "OpenSees"
+    },
+    "EDP": [],
+    "randomVariables": [],
+    "Applications": {
+        "UQ": {
+            "Application": "Dakota-UQ",
+            "ApplicationData": {}
+        }
+    },
+    "remoteAppDir": "/home1/00477/tg457427/SimCenterBackendApplications/May-2020",
+    "uqResults": {},
+    "workingDir": "C:/Workdir/quoFEM",
+    "localAppDir": "C:/Tools/quoFEM/quoFEM",
+    "python": "python"
+}

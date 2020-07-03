@@ -62,7 +62,7 @@ UQ_METHOD:
     uqEngine: Dakota
     uqType: Sensitivity Analysis
 
-FEM_MODELS:
+FE_MODELS:
   TRUSS: &TRUSS
     <<: *INPUT
     fem:
@@ -78,6 +78,7 @@ FEM_MODELS:
       - name: Node_2_Disp_2
     randomVariables: 
       - name: E
+        title: elastic modulus
         distribution: Weibull
         refCount: 1
         scaleparam: 210
@@ -85,6 +86,7 @@ FEM_MODELS:
         value: RV.E
         variableClass: Uncertain
       - name: P
+        title: load magnitude
         distribution: Beta
         alphas: 2
         betas: 2
@@ -94,6 +96,7 @@ FEM_MODELS:
         value: RV.P
         variableClass: Uncertain
       - name: Ao
+        title: cross sectional area for the other six bars
         distribution: Lognormal
         mean: 250
         refCount: 1
@@ -101,6 +104,7 @@ FEM_MODELS:
         value: RV.Ao
         variableClass: Uncertain
       - name: Au
+        title: cross sectional area for the upper three bars
         distribution: Normal
         mean: 500
         refCount: 1
@@ -161,6 +165,7 @@ FEM_MODELS:
       - name: f
     randomVariables:
       - name: "x"
+        title: ""
         distribution: Uniform
         lowerbound: -2
         refCount: 1
@@ -168,6 +173,7 @@ FEM_MODELS:
         value: RV.x
         variableClass: Uncertain
       - name: "y"
+        title: ""
         distribution: Uniform
         lowerbound: 1.4
         refCount: 1
@@ -180,7 +186,7 @@ FILES:
     truss_model_py: &truss_model_py
       loc: truss/model.py
       description: This file is a Python script which takes a given realization of the problem's random variables, and runs a finite element analysis of the truss with OpenSeesPy. It is supplied to the **Input Script** field of the **FEM** tab, and obviates the need for supplying a **Postprocess Script**. When this script is invoked in the workflow, it receives the list of the identifiers supplied in the **QoI** tab through the operating system's `stdout` variable, and a set of random variable realizations by star-importing the **Parameters File** from the **FEM** tab.
-    truss_params_py: &truss_params_py 
+    truss_params_py: &truss_params_py
       loc: truss/params.py
       description: This file is a Python script which defines the problem's random variables as objects in the Python runtime. It is supplied to the **Parameters File** field of the **FEM** tab. *The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.*
     truss_model_tcl: &truss_model_tcl 
@@ -196,6 +202,11 @@ FILES:
     rosen_params_py: &rosen_params_py 
       loc: rosen/params.py
       description: This file is a Python script which defines the problem's random variables as objects in the Python runtime. It is supplied to the **Parameters File** field of the **FEM** tab. *The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.*
+
+  frame:
+    frame_model_tcl: &frame_model_tcl
+      loc: frame/fem.tcl
+      description: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a `results.out` fils. As a consequence, no postprocessing script is needed. The values placed in `results.out` file are the difference between computed and observed values. Expressed another way, the function `f(m1,m2)` computed and written to the `results.out` file is `f(m1,m2) = ObservedPeriods - ComputedPeriods(m1,m2)`. The UQ algorithm when running is searching for values of the random variable parameters (`m1` and `m2`) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.
 
        
 ##############################################################################
@@ -240,6 +251,7 @@ quoFEM:
       UQ_Method: {<<: *FWD_LHS}
   - id: quo-03
     title: Reliability Analysis
+    files: [*truss_model_tcl, *truss_post_tcl]
     docs:
       synopsis: This example uses quoFEM to perform a second-order reliability analysis (SORM) of an OpenSees FE model.
       statement: Consider the stochastic response of a two-dimensional truss structure shown in the following figure with uncertain section dimensions, material moduli, and loading magnitude. Two input scripts are used to define a [local reliability](/common/user_manual/usage/desktop/DakotaReliability.html) procedure to be coordinated by quoFEM which will estimate response magnitudes whose probabilities of exceedance are 0.02, 0.2, 0.4, 0.6, 0.8, and 0.99.
@@ -252,6 +264,7 @@ quoFEM:
       UQ_Method: {<<: *REL_SORM}
   - id: quo-04
     title: Sensitivity Analysis
+    files: [*truss_model_tcl, *truss_post_tcl]
     docs:
       synopsis: This example uses quoFEM to perform a global sensitivity analysis of an OpenSees FE model.
       statement: Consider a stochastic model of a two-dimensional truss structure like that shown in the following figure. A [sensitivity analysis](/common/user_manual/usage/desktop/DakotaSensitivity.html) procedure is coordinated by quoFEM which will estimate the sensitivities of the response quantities of interest with respect to the problem's random variables.
@@ -264,6 +277,7 @@ quoFEM:
       UQ_Method: {<<: *SEN_LHS}
   - id: quo-05
     title: Non-structural problems with Python
+    files: [*rosen_rosen_py, *rosen_params_py]
     docs: &rosenbrock
       synopsis: This example illustrates how Python scripting can be used with quoFEM to express general mathematical models without the use of a dedicated finite element analysis engine.
       statement: >
@@ -282,6 +296,7 @@ quoFEM:
       UQ_Method: {<<: *FWD_LHS}
   - id: quo-06
     title: Optimization
+    files: [*rosen_rosen_py, *rosen_params_py]
     docs:
       << : *rosenbrock
       synopsis: In this example, quoFEM is used to solve a classical optimization problem, for which an analytic solution is known.
@@ -291,19 +306,33 @@ quoFEM:
       <<: *ROSEN
       UQ_Method: {<<: *CON_CAL}
   - id: quo-07
-    name: Conventional Calibration - Steel Frame
+    title: Conventional Calibration - Steel Frame
+    files: [*frame_model_tcl]
+    docs:
+      statement: >
+        In this example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. 
+
+        ![](frame/joelFrame.png) \
+        
+        Consider the two-story building structure shown above. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10' are measured as are the lengths of the building along the X and Y direction, which are measured at $33'-4"$ and $30'$. For the steel columns, Young's modulus is measured to be $29,000ksi$, $Area=110in2$, and $I_{xx}=1190 in^4$. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.
+
+        What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, `m1` and `m2`, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:
+      results: >
+        Once the analysis is complete the **RES** tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters to be $m1=0.515549$ and $m2=0.256492$.
+      res_fig: frame/joelRES.png
     srcDir: "frame"
     input:
       <<: *FRAME
       UQ_Method: {<<: *CON_CAL}
   - id: quo-08
-    name: Bayesian Calibration - Steel Frame
+    title: Bayesian Calibration - Steel Frame
+    files: [*frame_model_tcl]
     srcDir: "frame"
     input:
       <<: *FRAME
       UQ_Method: {<<: *BAY_CAL}
   - id: quo-09
-    name: Forward Propagation - FEAP
+    title: Forward Propagation - FEAP
     srcDir: "truss"
     input:
       <<: *TRUSS
