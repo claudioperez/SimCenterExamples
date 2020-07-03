@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Two-Dimensional Truss: Sampling, Reliability and Sensitivity &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -36,7 +36,9 @@
   <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="6.2. Steel Frame: Parameter Estimation" href="FramePeriod.html" />
+    <link rel="prev" title="6. Examples" href="../examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,13 +86,22 @@
             
             
               <p class="caption"><span class="caption-text">User Manual</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">6. Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sampling-analysis">6.1.1. Sampling Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reliability-analysis">6.1.2. Reliability Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-sensitivity">6.1.3. Global Sensitivity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FramePeriod.html">6.2. Steel Frame: Parameter Estimation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
 </ul>
@@ -150,7 +161,9 @@
     
       <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Two-Dimensional Truss: Sampling, Reliability and Sensitivity</li>
+          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">6.1. </span>Two-Dimensional Truss: Sampling, Reliability and Sensitivity</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,7 +183,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="two-dimensional-truss-sampling-reliability-and-sensitivity">
-<h1>Two-Dimensional Truss: Sampling, Reliability and Sensitivity<a class="headerlink" href="#two-dimensional-truss-sampling-reliability-and-sensitivity" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.1. </span>Two-Dimensional Truss: Sampling, Reliability and Sensitivity<a class="headerlink" href="#two-dimensional-truss-sampling-reliability-and-sensitivity" title="Permalink to this headline">¶</a></h1>
 <p>Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure.</p>
 <div class="align-center figure">
 <a class="reference internal image-reference" href="../../../../../_images/truss.png"><img alt="../../../../../_images/truss.png" src="../../../../../_images/truss.png" style="width: 600px;" /></a>
@@ -300,7 +313,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The use has the option to provide no postprocess script (in which case the main script must create a results.out file containing a single line with as many space separated numbers as QoI or the user may provide a python script that also performs the postprocessing. An example of a postprocessing python script is <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/exampleOpenSeesForward/postprocess.py">postprocess.py</a>.</p>
+<p>The use has the option to provide no postprocess script (in which case the main script must create a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file containing a single line with as many space separated numbers as QoI or the user may provide a Python script that also performs the postprocessing. An example of a postprocessing Python script is <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/exampleOpenSeesForward/postprocess.py">postprocess.py</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 
 <span class="c1"># written: fmk, adamzs 01/18</span>
@@ -376,7 +389,7 @@
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
 <div class="section" id="sampling-analysis">
-<h2>Sampling Analysis<a class="headerlink" href="#sampling-analysis" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1.1. </span>Sampling Analysis<a class="headerlink" href="#sampling-analysis" title="Permalink to this headline">¶</a></h2>
 <p>To perform a Sampling or Forward propagation uncertainty analysis the user would perform the following steps:</p>
 <p>The steps involved:</p>
 <ol class="arabic simple">
@@ -386,19 +399,19 @@
 <img alt="../../../../../_images/trussUQ.png" src="../../../../../_images/trussUQ.png" />
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Next select the FEM tab from the input panel. This will default in the OpenSees FEM engine. For the main script copy the path name to TrussSelection.tcl or select choose and navigate to the file. For the postprocess script, repeat the same procedure for the postprocess.tcl script.</p></li>
+<li><p>Next select the <strong>FEM</strong> tab from the input panel. This will default in the OpenSees FEM engine. For the main script copy the path name to TrussSelection.tcl or select choose and navigate to the file. For the postprocess script, repeat the same procedure for the postprocess.tcl script.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussFEM.png" src="../../../../../_images/trussFEM.png" />
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Next select the RV tab from the input panel. This should be pre-populated with four random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script. For each variable, from the drop down menu change them from having a constant distribution to a normal one and then provide the means and standard deviations specified for the problem.</p></li>
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This should be pre-populated with four random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script. For each variable, from the drop down menu change them from having a constant distribution to a normal one and then provide the means and standard deviations specified for the problem.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussRV.png" src="../../../../../_images/trussRV.png" />
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Next select the <code class="docutils literal notranslate"><span class="pre">QoI</span></code> panel. Here enter ‘Node_3_Disp_2’ for the one variable.</p></li>
+<li><p>Next select the <strong>QoI</strong> tab. Here enter ‘Node_3_Disp_2’ for the one variable.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussQoI.png" src="../../../../../_images/trussQoI.png" />
@@ -408,12 +421,12 @@
 <p>The user can add additional QoI by selecting add and then providing additional names. As seen from the postprocess script any of the 6 nodes may be specified and for any node either the 1 or 2 dof direction.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>Next click on the ‘Run’ button. This will cause the backend application to launch dakota. When done the RES panel tab will be selected and the results will be displayed. The results show the values the mean and standard deviation.</p></li>
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed. The results show the values the mean and standard deviation.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussRES1.png" src="../../../../../_images/trussRES1.png" />
 </div>
-<p>If the user selects the “Data” tab in the results panel, they will be presented with both a graphical plot and a tabular listing of the data.</p>
+<p>If the user selects the <strong>Data</strong> tab in the results panel, they will be presented with both a graphical plot and a tabular listing of the data.</p>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussRES2.png" src="../../../../../_images/trussRES2.png" />
 </div>
@@ -423,24 +436,24 @@
 </div>
 </div>
 <div class="section" id="reliability-analysis">
-<h2>Reliability Analysis<a class="headerlink" href="#reliability-analysis" title="Permalink to this headline">¶</a></h2>
-<p>If the user is interested in the probability that a particular response measure will be exceeded, an alternate strategy is to perform a reliability analysis. In order to perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
+<h2><span class="section-number">6.1.2. </span>Reliability Analysis<a class="headerlink" href="#reliability-analysis" title="Permalink to this headline">¶</a></h2>
+<p>If the user is interested in the probability that a particular response measure will be exceeded, an alternate strategy is to perform a reliability analysis. In order to perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the <strong>UQ</strong> tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussSORM-UQ.png" src="../../../../../_images/trussSORM-UQ.png" />
 </div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
+<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the <strong>RUN</strong> button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussSORM-RES.png" src="../../../../../_images/trussSORM-RES.png" />
 </div>
 </div>
 <div class="section" id="global-sensitivity">
-<h2>Global Sensitivity<a class="headerlink" href="#global-sensitivity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1.3. </span>Global Sensitivity<a class="headerlink" href="#global-sensitivity" title="Permalink to this headline">¶</a></h2>
 <p>In a global sensitivity analysis the user is wishing to understand what is the influence of the individual random variables on the quantities of interest. This is typically done before the user launches large scale forward uncertainty problems in order to limit the number of random variables used so as to limit the number of simulations performed.</p>
-<p>To perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
+<p>To perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the <strong>UQ</strong> tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussSens-UQ.png" src="../../../../../_images/trussSens-UQ.png" />
 </div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
+<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the <strong>RUN</strong> button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
 <div class="align-center figure">
 <img alt="../../../../../_images/trussSensitivity-RES.png" src="../../../../../_images/trussSensitivity-RES.png" />
 </div>

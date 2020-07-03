@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.2. Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -36,7 +36,9 @@
   <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="7. Bugs &amp; Feature Requests" href="../../../bugs.html" />
+    <link rel="prev" title="6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity" href="TrussOpenSees.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,13 +86,17 @@
             
             
               <p class="caption"><span class="caption-text">User Manual</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">6. Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. Steel Frame: Parameter Estimation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
 </ul>
@@ -150,7 +156,9 @@
     
       <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Steel Frame: Parameter Estimation</li>
+          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">6.2. </span>Steel Frame: Parameter Estimation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,13 +178,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="steel-frame-parameter-estimation">
-<h1>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
-<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <a class="reference internal" href="quo-07.html#lbljoelframe"><span class="std std-numref">Fig. 6.7.1</span></a>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
+<h1><span class="section-number">6.2. </span>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
+<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <a class="reference internal" href="#lbljoelframe"><span class="std std-numref">Fig. 6.2.1</span></a>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
 <div class="align-center figure" id="id1">
 <span id="lbljoelframe"></span><a class="reference internal image-reference" href="../../../../../_images/joelFrame.png"><img alt="../../../../../_images/joelFrame.png" src="../../../../../_images/joelFrame.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.2.1 </span><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<p>What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantaties, m1 and m2, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:</p>
+<p>What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, m1 and m2, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:</p>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -276,8 +284,8 @@ close $outFile
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ol class="arabic simple">
-<li><p>The tcl script when it runs creates a <strong>results.out</strong>. As a consequence, no postprocessing script is needed.</p></li>
-<li><p>The values placed in <strong>results.out</strong> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span></code> computed and written to the  <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(m1,m2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">m2</span></code>) that attempt to minimize the function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
+<li><p>The tcl script when it runs creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. As a consequence, no postprocessing script is needed.</p></li>
+<li><p>The values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span></code> computed and written to the  <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(m1,m2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">m2</span></code>) that attempt to minimize the function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
 </ol>
 </div>
 <div class="admonition warning">
@@ -286,13 +294,13 @@ close $outFile
 </div>
 <p>The steps involved:</p>
 <ol class="arabic simple">
-<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota. In the UQ Method category drop down menu change the category to <code class="docutils literal notranslate"><span class="pre">Parameters</span> <span class="pre">Estimation</span></code>, and the method as NL2SOL, the convergence tolerance to <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code> and leave the scaling factors empty (assumes weights of 1.0 on all response values) as shown in the figure.</p></li>
+<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota. In the UQ Method category drop down menu change the category to <strong>Parameters Estimation</strong>, and the method as <strong>NL2SOL</strong>, the convergence tolerance to <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code> and leave the scaling factors empty (assumes weights of 1.0 on all response values) as shown in the figure.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/joelUQ.png" src="../../../../../_images/joelUQ.png" />
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Next select the FEM tab from the input panel selection. This will default in the OpenSees FEM engine. For the main script copy the path name to the FrameModelPeriodSelection.tcl or select choose and navigate to the file.</p></li>
+<li><p>Next select the <strong>FEM</strong> tab from the input panel selection. This will default in the OpenSees FEM engine. For the main script copy the path name to the FrameModelPeriodSelection.tcl file or select choose and navigate to the file.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/joelFEM.png" src="../../../../../_images/joelFEM.png" />
@@ -302,7 +310,7 @@ close $outFile
 <p>As discussed but it is worth noting again, because the script generates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file, no postprocessing script is needed for this example. This might not always be the case for some of your problems.</p>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Next select the RV tab from the input panel. This should be prepopulated with two random variables with same names as those having pset in the tcl script, i.e. m1 and m2. For each variable, from the drop down menu change them from having a constant distribution to a continuous design one and then provide the lower bounds, upper bounds and the starting points shown in the figure below.</p></li>
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This should be prepopulated with two random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script, i.e. m1 and m2. For each variable, from the drop down menu change them from having a constant distribution to a continuous design one and then provide the lower bounds, upper bounds and the starting points shown in the figure below.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/joelRV.png" src="../../../../../_images/joelRV.png" />
@@ -312,7 +320,7 @@ close $outFile
 <p>For the Parameter Estimation category of UQ methods, only continuous design distributions may be entered.</p>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Next select the <code class="docutils literal notranslate"><span class="pre">QoI</span></code> panel. Here enter <strong>2</strong> variable names <code class="docutils literal notranslate"><span class="pre">dT1</span></code> and <code class="docutils literal notranslate"><span class="pre">dT2</span></code>.</p></li>
+<li><p>Next select the <strong>QoI</strong> panel. Here enter <strong>2</strong> variable names <code class="docutils literal notranslate"><span class="pre">dT1</span></code> and <code class="docutils literal notranslate"><span class="pre">dT2</span></code>.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/joelQoI.png" src="../../../../../_images/joelQoI.png" />
@@ -322,7 +330,7 @@ close $outFile
 <p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors. We used ‘dT1’ and ‘dT2’ due to our affinity for 3 letter acronyms!</p>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>Next click on the ‘Run’ button. This will cause the backend application to launch Dakota. When done the RES panel tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters to be <span class="math notranslate nohighlight">\(m1=0.52 (0.515549)\)</span> and <span class="math notranslate nohighlight">\(m2=0.26 (0.256492)\)</span>.</p></li>
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch Dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters to be <span class="math notranslate nohighlight">\(m1=0.52 (0.515549)\)</span> and <span class="math notranslate nohighlight">\(m2=0.26 (0.256492)\)</span>.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/joelRES.png" src="../../../../../_images/joelRES.png" />

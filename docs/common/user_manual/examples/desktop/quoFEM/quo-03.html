@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.3. Reliability &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.3. Reliability Analysis &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="6.4. Sensitivity" href="quo-04.html" />
+    <link rel="next" title="6.4. Sensitivity Analysis" href="quo-04.html" />
     <link rel="prev" title="6.2. Forward Propagation - OpenSeesPy" href="quo-02.html" /> 
 </head>
 
@@ -95,13 +95,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quo-01.html">6.1. Forward Propagation - OpenSees/Tcl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.2. Forward Propagation - OpenSeesPy</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Reliability</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#global-sensitivity">6.3.1. Global Sensitivity</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Reliability Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#model-definition">6.3.1. Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">6.3.2. Results</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Arbitrary Python Scripts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Calibration - Rosembrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Non-structural problems with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
 </ul>
@@ -120,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../schemas/schema.html">6. Schemas</a></li>
 </ul>
 
             
@@ -167,7 +169,7 @@
         
           <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
         
-      <li><span class="section-number">6.3. </span>Reliability</li>
+      <li><span class="section-number">6.3. </span>Reliability Analysis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -186,26 +188,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quo-03">
-<h1><span class="section-number">6.3. </span>Reliability<a class="headerlink" href="#quo-03" title="Permalink to this headline">¶</a></h1>
-<p>If the user is interested in the probability that a particular response measure will be exceeded, an alternate strategy is to perform a reliability analysis. In order to perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSORM-UQ.png" src="../../../../../_images/trussSORM-UQ.png" />
+  <div class="section" id="reliability-analysis">
+<h1><span class="section-number">6.3. </span>Reliability Analysis<a class="headerlink" href="#reliability-analysis" title="Permalink to this headline">¶</a></h1>
+<p>This example uses quoFEM to perform a second-order reliability analysis (SORM) of an OpenSees FE model.</p>
+<p>Consider the stochastic response of a two-dimensional truss structure shown in the following figure with uncertain section dimensions, material moduli, and loading magnitude. Two input scripts are used to define a <a class="reference external" href="/common/user_manual/usage/desktop/DakotaReliability.html">local reliability</a> procedure to be coordinated by quoFEM which will estimate response magnitudes whose probabilities of exceedance are 0.02, 0.2, 0.4, 0.6, 0.8, and 0.99.</p>
+<div class="figure align-default">
+<img alt="../../../../../_images/truss1.png" src="../../../../../_images/truss1.png" />
 </div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSORM-RES.png" src="../../../../../_images/trussSORM-RES.png" />
+<p>The following problem variables are modeled as uncertain parameters:</p>
+<ol class="arabic simple">
+<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: Weibull distribution with a  scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of 210,  shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of 20, .</p></li>
+<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: Beta distribution with a  first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of 2,  second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of 2,  lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 20,  upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 30, .</p></li>
+<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: Lognormal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 250,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 50, .</p></li>
+<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: Normal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 500,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 100, .</p></li>
+</ol>
+<div class="section" id="model-definition">
+<h2><span class="section-number">6.3.1. </span>Model Definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h2>
+<p>The following input files must be placed in an <em>empty</em> folder:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/model.tcl</span></code>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem’s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/post.tcl</span></code>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <cite>results.out</cite> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
-<div class="section" id="global-sensitivity">
-<h2><span class="section-number">6.3.1. </span>Global Sensitivity<a class="headerlink" href="#global-sensitivity" title="Permalink to this headline">¶</a></h2>
-<p>In a global sensitivity analysis the user is wishing to understand what is the influence of the individual random variables on the quantities of interest. This is typically done before the user launches large scale forward uncertainty problems in order to limit the number of random variables used so as to limit the number of simulations performed.</p>
-<p>To perform a reliability analysis the steps above would be repeated with the exception that the user would select a reliability analysis method instead of a Forward Propagation method. To obtain reliability results using the Second-Order Reliability Method (SORM) for the truss problem the user would follow the same sequence of steps as previously. The difference would be in the UQ tab in which the user would select a Reliability as the Dakota Method Category and then choose Local reliability. In the figure the user is specifying that they are interested in the probability that the displacement will exceed certain response levels.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSens-UQ.png" src="../../../../../_images/trussSens-UQ.png" />
 </div>
-<p>After the user fills in the rest of the tabs as per the previous section, the user would then press the ‘’RUN’’ button. The application (after spinning for a while with the wheel of death) will present the user with the results.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussSensitivity-RES.png" src="../../../../../_images/trussSensitivity-RES.png" />
+<div class="section" id="results">
+<h2><span class="section-number">6.3.2. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>None</p>
+<div class="figure align-default">
+<img alt="../../../../../_images/trussSORM-RES1.png" src="../../../../../_images/trussSORM-RES1.png" />
 </div>
 </div>
 </div>

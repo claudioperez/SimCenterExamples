@@ -110,6 +110,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/schemas/schema.html">6. Schemas</a></li>
 </ul>
 
             
@@ -187,7 +188,7 @@ it could represent the average distances from dwellings to fire stations or from
 <span class="eqno">(4.1.2)<a class="headerlink" href="#equation-common-developer-manual-verification-desktop-quofem-interpointdistances-0" title="Permalink to this equation">¶</a></span>\[E(P,Q) = \frac{1}{15} \left( \frac{L_w^3}{L_h^2}+\frac{L_h^3}{L_w^2}+d\left(3-\frac{L_w^2}{L_h^2}-\frac{L_h^2}{L_w^2}\right)
 +\frac{5}{2} \left(\frac{L_h^2}{L_w}\log\right(\frac{L_w+d}{L_h}\left)+\frac{L_w^2}{L_h}\log\left(\frac{L_h+d}{L_w}\right)\right)\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(d=\sqrt{L_w^2+L_h^2}\)</span></p>
-<p>Using the above formula one can compute a number of expected distances for rectangles of different sizes, e.g.</p>
+<p>Using the above formula one can compute a number of expected distances for rectangles of different sizes, for example:</p>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -230,9 +231,9 @@ it could represent the average distances from dwellings to fire stations or from
 </pre></div>
 </div>
 </div>
-<p>In the following steps we will demonstrate how this is done using the quoFEM app with figures showing the inputs for case with <code class="docutils literal notranslate"><span class="pre">Lw=1.0</span></code>, <code class="docutils literal notranslate"><span class="pre">Lh=</span> <span class="pre">0.6</span></code> and utilizing LHS with 1000 samples. A table will provide additional results for other sampling methods and numbers of samples.</p>
+<p>In the following steps we will demonstrate how this is done using the quoFEM app with figures showing the inputs for case with <code class="docutils literal notranslate"><span class="pre">Lw=1.0</span></code>, <code class="docutils literal notranslate"><span class="pre">Lh=</span> <span class="pre">0.6</span></code> and utilizing <strong>LHS</strong> with 1000 samples. A table will provide additional results for other sampling methods and numbers of samples.</p>
 <ol class="arabic simple">
-<li><p>Repeating this exercise in quoFEM requires using either the OpenSees or the OpenSeesPy Interpreter. Depending on your choice, create a <strong>NEW</strong> folder and in it place one of the following files, the first is a python script to be named ghosh.py. It is to be used with the OpenSeesPy FEM application.</p></li>
+<li><p>Repeating this exercise in quoFEM requires using either the OpenSees or the OpenSeesPy Interpreter. Depending on your choice, create a <em>new</em> folder and in it place one of the following files, the first is a Python script to be named <code class="docutils literal notranslate"><span class="pre">ghosh.py</span></code>. It is to be used with the OpenSeesPy FEM application.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 
@@ -261,31 +262,31 @@ it could represent the average distances from dwellings to fire stations or from
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Start the quoFEM app and select Dakota UQ Engine, Forward propagation type of problem and LHS method. Specify 10000 samples and a seed of 175.</p></li>
+<li><p>Start the quoFEM app and select Dakota UQ Engine, Forward propagation type of problem and LHS method. Specify <code class="docutils literal notranslate"><span class="pre">10000</span></code> samples and a seed of <code class="docutils literal notranslate"><span class="pre">175</span></code>.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/ghoshUQ.png" src="../../../../../_images/ghoshUQ.png" />
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Select next the FEM tab. From this tab select either OpenSees or OpenSeesPy depending on which file you choose to place in the folder. For the input file specify the full path to this file.</p></li>
+<li><p>Select next the <strong>FEM</strong> tab. From this tab select either OpenSees or OpenSeesPy depending on which file you choose to place in the folder. For the input file specify the full path to this file.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/ghoshFEM.png" src="../../../../../_images/ghoshFEM.png" />
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Select the <code class="docutils literal notranslate"><span class="pre">RV</span></code> tab. Create 4 random variables named X1, Y1, X2, Y2. For each specify a uniform distribution with the range for the X variables being 0 and Lw and range of Y variables being 0 and Lh. This is as shown for Lw = 1.0 and Lh = 0.6.</p></li>
+<li><p>Select the <strong>RV</strong> tab. Create 4 random variables named <code class="docutils literal notranslate"><span class="pre">X1</span></code>, <code class="docutils literal notranslate"><span class="pre">Y1</span></code>, <code class="docutils literal notranslate"><span class="pre">X2</span></code>, <code class="docutils literal notranslate"><span class="pre">Y2</span></code>. For each specify a uniform distribution with the range for the X variables being 0 and <code class="docutils literal notranslate"><span class="pre">Lw</span></code> and range of Y variables being 0 and <code class="docutils literal notranslate"><span class="pre">Lh</span></code>. This is as shown for <code class="docutils literal notranslate"><span class="pre">Lw</span> <span class="pre">=</span> <span class="pre">1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">Lh</span> <span class="pre">=</span> <span class="pre">0.6</span></code>.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/ghoshRV.png" src="../../../../../_images/ghoshRV.png" />
 </div>
 <ol class="arabic simple" start="5">
-<li><p>Select the <code class="docutils literal notranslate"><span class="pre">QoI</span></code> tab. Create one EDP and name it E as shown.</p></li>
+<li><p>Select the <strong>QoI</strong> tab. Create one EDP and name it <code class="docutils literal notranslate"><span class="pre">E</span></code> as shown.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/ghoshQoI.png" src="../../../../../_images/ghoshQoI.png" />
 </div>
 <ol class="arabic simple" start="6">
-<li><p>Press the Run button. The results should show the mean to be 0.425709</p></li>
+<li><p>Press the Run button. The results should show the mean to be <code class="docutils literal notranslate"><span class="pre">0.425709</span></code>.</p></li>
 </ol>
 <div class="align-center figure">
 <img alt="../../../../../_images/ghoshRES.png" src="../../../../../_images/ghoshRES.png" />

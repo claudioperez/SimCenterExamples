@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="3.2. Download the Application" href="downloadApp.html" />
+    <link rel="next" title="3.1.3. Windows Users" href="downloadOtherWindows_quoFEM.html" />
     <link rel="prev" title="3.1.1. Windows Users" href="downloadOtherWindows.html" /> 
 </head>
 
@@ -101,6 +101,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#test-the-install-of-python-opensees-dakota">3.1.2.6. Test the Install of Python, OpenSees &amp; Dakota</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="downloadOtherWindows_quoFEM.html">3.1.3. Windows Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downloadOtherMAC_quoFEM.html">3.1.4. MacOS Users</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="downloadApp.html">3.2. Download the Application</a></li>
@@ -124,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemas/schema.html">6. Schemas</a></li>
 </ul>
 
             
@@ -222,6 +225,8 @@ dated version 2.7. We recommend installing Python 3.7 from <a class="reference e
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">numpy</span>
 <span class="n">pip3</span> <span class="n">install</span> <span class="n">scipy</span>
 <span class="n">pip3</span> <span class="n">install</span> <span class="n">pandas</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">tables</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">hdf5</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -258,6 +263,10 @@ area you should now only have a single option, click on the link to download <st
 </ol>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The additional requirement of installing <strong>Tcl</strong> is about to be removed from the <strong>OpenSees</strong> installation process. If the table for the <strong>Mac Download</strong> does not contain a second link, it has been removed and no <strong>Tcl</strong> install is required.</p>
+</div>
 </div>
 <div class="section" id="edit-your-shell-file">
 <h2><span class="section-number">3.1.2.5. </span>Edit Your Shell file<a class="headerlink" href="#edit-your-shell-file" title="Permalink to this headline">¶</a></h2>
@@ -282,8 +291,8 @@ export PYTHONPATH=$HOME/bin/dakota-6.10.0/share/dakota/Python
 <h2><span class="section-number">3.1.2.6. </span>Test the Install of Python, OpenSees &amp; Dakota<a class="headerlink" href="#test-the-install-of-python-opensees-dakota" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt>Steps to Test the Installation of the Applications:</dt><dd><ol class="arabic simple">
-<li><p>Open a terminal windows (type <cite>terminal</cite> in spotlight search)</p></li>
-<li><p>Type <cite>python3</cite> (this should bring up python interpreter)</p></li>
+<li><p>Open a terminal windows (type <code class="docutils literal notranslate"><span class="pre">terminal</span></code> in spotlight search)</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">python3</span></code> (this should bring up the Python interpreter)</p></li>
 <li><p>Enter the following to test the install of the modules and quit the application:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
@@ -293,14 +302,14 @@ export PYTHONPATH=$HOME/bin/dakota-6.10.0/share/dakota/Python
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Type <cite>OpenSees</cite> (this should bring up the OpenSees interpreter)</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">OpenSees</span></code> (this should bring up the OpenSees interpreter).</p></li>
 <li><p>Enter the following to exit this program:</p></li>
 </ol>
 <div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="nb">exit</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>Type <cite>dakota</cite> (this should start the dakota application which should give some error messages)</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">dakota</span></code> (this should start the Dakota application which should give some error messages).</p></li>
 </ol>
 </dd>
 </dl>

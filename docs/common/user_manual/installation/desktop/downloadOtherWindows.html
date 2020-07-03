@@ -101,6 +101,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="downloadOtherMAC.html">3.1.2. MacOS Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downloadOtherWindows_quoFEM.html">3.1.3. Windows Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downloadOtherMAC_quoFEM.html">3.1.4. MacOS Users</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="downloadApp.html">3.2. Download the Application</a></li>
@@ -124,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemas/schema.html">6. Schemas</a></li>
 </ul>
 
             
@@ -196,10 +199,9 @@
 <span id="lbldownloadotherwindows"></span><h1><span class="section-number">3.1.1. </span>Windows Users<a class="headerlink" href="#windows-users" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="install-location">
 <h2><span class="section-number">3.1.1.1. </span>Install Location<a class="headerlink" href="#install-location" title="Permalink to this headline">¶</a></h2>
-<p>The following set of instructions assumes all files will be placed in a <strong>C:SimCenter</strong> folder. You can of course place them anywhere you want, you just need to make appropriate changes to the <strong>env PATH</strong> settings. If you wish to follow our placement strategy, inside the <strong>C:SimCenter</strong> folder create <strong>2</strong> additional folders named <strong>dakota</strong> and <strong>OpenSees</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The choice of <strong>C:SimCenter</strong> was made as opposed to typical <strong>C:Program Files</strong> location as there is no uninstallers provided for the different software packages we provide. To remove the software you only need to remove the <strong>SimCenter</strong> folder.</p>
+<p>The choice of <strong>C:\SimCenter</strong> was made as opposed to typical <strong>C:\Program Files</strong> location as there is no uninstallers provided for the different software packages we provide. To remove the software you only need to remove the <strong>SimCenter</strong> folder.</p>
 </div>
 </div>
 <div class="section" id="python">
@@ -219,6 +221,8 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">tables</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">hdf5</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -231,7 +235,7 @@
 </div>
 <div class="section" id="id1">
 <h2><span class="section-number">3.1.1.3. </span>Dakota<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://dakota.sandia.gov/">Dakota</a> is the default UQ engine used by the quoFEM app that is publicly available from the <a class="reference external" href="https://dakota.sandia.gov/download.html">Dakota Download</a> page. The download page offers an extensive list of downloadable files. You can narrow this down to the file to be selected by selecting <strong>Windows</strong> in the <cite>Platform</cite>, <strong>6.10</strong> (<strong>6.10</strong> was latest at time of writing, select newer of course if available) in the <cite>Release</cite>, and <strong>Command Line Only</strong> for the <cite>interface type</cite>. In the <cite>Public</cite> area you should now only have a single option, click on the link to download <strong>Dakota</strong>. When you extract the files that you download, they will all be contained in a single folder, we suggest renaming it <strong>dakota-6.10.0</strong> (the last <strong>.0</strong> was the number in the download, sometimes developers issue minor updates and identify them through the last number). When you have renamed the folder move that folder to the <cite>C:SimCenterdakota</cite> folder.</p>
+<p><a class="reference external" href="https://dakota.sandia.gov/">Dakota</a> is the default UQ engine used by the quoFEM app that is publicly available from the <a class="reference external" href="https://dakota.sandia.gov/download.html">Dakota Download</a> page. The download page offers an extensive list of downloadable files. You can narrow this down to the file to be selected by selecting <strong>Windows</strong> in the <cite>Platform</cite>, <strong>6.10</strong> (<strong>6.10</strong> was latest at time of writing, select newer of course if available) in the <cite>Release</cite>, and <strong>Command Line Only</strong> for the <cite>interface type</cite>. In the <cite>Public</cite> area you should now only have a single option, click on the link to download <strong>Dakota</strong>. When you extract the files that you download, they will all be contained in a single folder, we suggest renaming it <strong>dakota-6.10.0</strong> (the last <strong>.0</strong> was the number in the download, sometimes developers issue minor updates and identify them through the last number). When you have renamed the folder move that folder to the <strong>C:\SimCenter\dakota\</strong> folder.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We place <strong>dakota-6.10.0</strong> inside <strong>dakota</strong> folder to be able to have multiple versions installed. This is a useful practice, as software developers make tweaks that can effect the results of past simulations. It is useful to be able to compare different versions of an application to ensure results stay the same.</p>
@@ -239,26 +243,26 @@
 </div>
 <div class="section" id="id2">
 <h2><span class="section-number">3.1.1.4. </span>OpenSees<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://opensees.berkeley.edu">OpenSees</a> is the default FEM engine used by the quoFEM app that is publicly available from the <a class="reference external" href="https://opensees.berkeley.edu/OpenSees/user/download.php">OpenSees Download</a> page. To download the <strong>OpenSees</strong> you have to enter your email address, which may also require you to register (that requirement is going away and may be gone by time you read this). At the bottom of the page, under section <strong>Windows Version</strong> is the download link for the current executable, currently <strong>3.2.0</strong> Follow the link to download the application. It is in the form of a <strong>.zip</strong> file. The zip file contains a folder and in the bin directory is the <strong>OpenSees.exe</strong> application. The other files and folders are needed by the application and must be kept. Rename the folder to <strong>OpenSees-3.2.0</strong> and move the folder to the <strong>C:SimCenterOpenSees</strong> folder.</p>
+<p><a class="reference external" href="https://opensees.berkeley.edu">OpenSees</a> is the default FEM engine used by the quoFEM app that is publicly available from the <a class="reference external" href="https://opensees.berkeley.edu/OpenSees/user/download.php">OpenSees Download</a> page. To download the <strong>OpenSees</strong> you have to enter your email address, which may also require you to register (that requirement is going away and may be gone by time you read this). At the bottom of the page, under section <strong>Windows Version</strong> is the download link for the current executable, currently <strong>3.2.0</strong> Follow the link to download the application. It is in the form of a <strong>.zip</strong> file. The zip file contains a folder and in the bin directory is the <strong>OpenSees.exe</strong> application. The other files and folders are needed by the application and must be kept. Rename the folder to <strong>OpenSees-3.2.0</strong> and move the folder to the <strong>C:\SimCenter\OpenSees</strong> folder.</p>
 </div>
 <div class="section" id="modify-the-environment-variables">
 <h2><span class="section-number">3.1.1.5. </span>Modify the Environment Variables<a class="headerlink" href="#modify-the-environment-variables" title="Permalink to this headline">¶</a></h2>
 <p>You now need to make some changes to your environment variables as neither OpenSees or Dakota includes an installer which typically performs this task.</p>
 <ol class="arabic simple">
 <li><p>Open the Start Search, type in “env”, and choose “Edit the system environment variables”</p></li>
-<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">Variables…</span></code> button at the bottom right of the application that pop up.</p></li>
-<li><p>Now we are going to edit the  <strong>PATH</strong> variable. Select the Path variable row to highlight it and then press the <code class="docutils literal notranslate"><span class="pre">Edit</span></code> button.</p></li>
+<li><p>Click the <strong>Environment Variables…</strong> button at the bottom right of the application that pop up.</p></li>
+<li><p>Now we are going to edit the  <strong>PATH</strong> variable. Select the Path variable row to highlight it and then press the <strong>Edit</strong> button.</p></li>
 <li><p>to the variables value you want to <strong>APPEND</strong> the following:</p></li>
 </ol>
 <ol class="arabic simple" start="5">
-<li><p>Press the <code class="docutils literal notranslate"><span class="pre">OK</span></code> button.</p></li>
-<li><p>Now we are going to create a new variable, <strong>PYTHONPATH</strong> variable. Press the <code class="docutils literal notranslate"><span class="pre">NEW</span></code> button.</p></li>
+<li><p>Press the <strong>OK</strong> button.</p></li>
+<li><p>Now we are going to create a new variable, <strong>PYTHONPATH</strong> variable. Press the <strong>NEW</strong> button.</p></li>
 <li><p>For the variable name enter: <strong>PYTHONPATH</strong>.</p></li>
 <li><p>For the variable path enter</p></li>
 </ol>
 <ol class="arabic simple" start="9">
-<li><p>Press the <code class="docutils literal notranslate"><span class="pre">OK</span></code> button.</p></li>
-<li><p>Press now the <cite>Apply`</cite> button and exit the SystemProperties application</p></li>
+<li><p>Press the <strong>OK</strong> button.</p></li>
+<li><p>Press now the <strong>Apply</strong> button and exit the SystemProperties application</p></li>
 </ol>
 </div>
 <div class="section" id="test-the-install-of-python-opensees-dakota">

@@ -94,15 +94,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. Forward Propagation - OpenSees/Tcl</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pre-processing">6.1.1. Pre-processing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#post-processing">6.1.2. Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-definition">6.1.1. Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">6.1.2. Results</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.2. Forward Propagation - OpenSeesPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.3. Reliability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Arbitrary Python Scripts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Conventional Calibration - Rosembrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.3. Reliability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.4. Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Non-structural problems with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
 </ul>
@@ -121,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../schemas/schema.html">6. Schemas</a></li>
 </ul>
 
             
@@ -187,63 +188,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quo-01">
-<h1><span class="section-number">6.1. </span>Forward Propagation - OpenSees/Tcl<a class="headerlink" href="#quo-01" title="Permalink to this headline">¶</a></h1>
-<p>This example will use quoFEM to estimate the first and second central moments of a FE model’s response, given the marginal distributions of various random parameters.</p>
-<p>Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure.</p>
-<div class="align-center figure">
-<a class="reference internal image-reference" href="../../../../../_images/truss.png"><img alt="../../../../../_images/truss.png" src="../../../../../_images/truss.png" style="width: 600px;" /></a>
+  <div class="section" id="forward-propagation-opensees-tcl">
+<h1><span class="section-number">6.1. </span>Forward Propagation - OpenSees/Tcl<a class="headerlink" href="#forward-propagation-opensees-tcl" title="Permalink to this headline">¶</a></h1>
+<p>This example uses quoFEM to estimate the first and second central moments of a FE model?s response, given the marginal distributions of various random parameters.</p>
+<p>Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure. Two input scripts are used to define a forward propagation procedure to be coordinated by quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Latin hypercube sampling.</p>
+<div class="figure align-default">
+<img alt="../../../../../_images/truss1.png" src="../../../../../_images/truss1.png" />
 </div>
-<p>The structure has uncertain properties that all follow a normal distribution as follows:</p>
+<p>The following problem variables are modeled as uncertain parameters:</p>
 <ol class="arabic simple">
-<li><p>Elastic modulus (<code class="docutils literal notranslate"><span class="pre">E</span></code>): mean <span class="math notranslate nohighlight">\(\mu_E=205 \mathrm{ kN}/\mathrm{mm}^2\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma_E =15 \mathrm{ kN}/\mathrm{mm}^2\)</span> (COV = 7.3%)</p></li>
-<li><p>Load (<code class="docutils literal notranslate"><span class="pre">P</span></code>): mean <span class="math notranslate nohighlight">\(\mu_P =25 kN\)</span> and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_P = 3 \mathrm{ kN}\)</span>, (COV = 12%).</p></li>
-<li><p>Cross sectional area for the upper three bars (<code class="docutils literal notranslate"><span class="pre">Au</span></code>): mean <span class="math notranslate nohighlight">\(\mu_{Au} = 500 \mathrm{mm}^2\)</span>, and a standard deviation of <span class="math notranslate nohighlight">\(\sigma_{Au} = 25\mathrm{mm}^2\)</span>  (COV = 5%)</p></li>
-<li><p>Cross sectional area for the other six bars (<code class="docutils literal notranslate"><span class="pre">Ao</span></code>): mean <span class="math notranslate nohighlight">\(\mu_{Ao} = 250 \mathrm{mm}^2\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{Ao} = 10\mathrm{mm}^2\)</span> (COV = 4%)</p></li>
+<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: Weibull distribution with a  scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of 210,  shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of 20, .</p></li>
+<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: Beta distribution with a  first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of 2,  second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of 2,  lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 20,  upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 30, .</p></li>
+<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: Lognormal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 250,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 50, .</p></li>
+<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: Normal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 500,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 100, .</p></li>
 </ol>
-<p>Two input files are used to define a forward propagation procedure with quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Monte-Carlo simulation. The relevant problem files may be downloaded from <strong>LINK</strong></p>
-<div class="section" id="pre-processing">
-<h2><span class="section-number">6.1.1. </span>Pre-processing<a class="headerlink" href="#pre-processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="model-definition">
+<h2><span class="section-number">6.1.1. </span>Model Definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h2>
 <p>The following input files must be placed in an <em>empty</em> folder:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/model.tcl</span></code>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem’s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/post.tcl</span></code>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <cite>results.out</cite> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
+</ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
-<ol class="arabic simple">
-<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/exampleOpenSeesForward/TrussTemplate.tcl">TrussTemplate.tcl</a> . The first lines containing <code class="docutils literal notranslate"><span class="pre">pset</span></code> will be read by the application when the file is selected and the application will autopopulate the Random Variables input panel with these same variable names. It is of course possible to explicitly use Random Variables without the <code class="docutils literal notranslate"><span class="pre">pset</span></code> command as is demonstrated in the verification section.</p></li>
-</ol>
-<p>2. <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/exampleOpenSeesForward/postprocess.tcl">postprocess.tcl</a>.
-This script will accept as input any of the 6 nodes in the domain and for each of the two dof directions. The user has the option to provide no postprocess script (in which case the main script must create a results.out file containing a single line with as many space separated numbers as QoI or the user may provide a python script that also performs the postprocessing. An example of a postprocessing python script is <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/exampleOpenSeesForward/postprocess.py">postprocess.py</a>.</p>
-<p>To perform a Sampling or Forward propagation uncertainty analysis the user would perform the following steps:</p>
-<ol class="arabic simple">
-<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota, and the UQ Method Category as Forward Propagation, and the Forward Propagation method as LHS (Latin Hypercube). Change the #samples to 1000 and the seed to 20 as shown in the figure.</p></li>
-</ol>
-<ol class="arabic simple" start="2">
-<li><p>Next select the FEM tab from the input panel. This will default in the OpenSees FEM engine. For the main script copy the path name to TrussSelection.tcl or select choose and navigate to the file. For the postprocess script, repeat the same procedure for the postprocess.tcl script.</p></li>
-</ol>
-<ol class="arabic simple" start="3">
-<li><p>Next select the RV tab from the input panel. This should be pre-populated with four random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script. For each variable, from the drop down menu change them from having a constant distribution to a normal one and then provide the means and standard deviations specified for the problem.</p></li>
-</ol>
-<ol class="arabic simple" start="4">
-<li><p>Next select the QoI panel. Here enter ‘Node_3_Disp_2’ for the one variable.</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The user can add additional QoI by selecting add and then providing additional names. As seen from the postprocess script any of the 6 nodes may be specified and for any node either the 1 or 2 dof direction.</p>
 </div>
-<ol class="arabic simple" start="5">
-<li><p>Next click on the ‘Run’ button. This will cause the backend application to launch dakota. When done the RES panel tab will be selected and the results will be displayed. The results show the values the mean and standard deviation.</p></li>
-</ol>
-</div>
-<div class="section" id="post-processing">
-<h2><span class="section-number">6.1.2. </span>Post-processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h2>
-<p>If the user selects the “Data” tab in the results panel, they will be presented with both a graphical plot and a tabular listing of the data.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussRES2.png" src="../../../../../_images/trussRES2.png" />
-</div>
-<p>Various views of the graphical display can be obtained by left and right clicking in the columns of the tabular data. If a singular column of the tabular data is pressed with both right and left buttons a frequency and CDF will be displayed, as shown in figure below.</p>
-<div class="align-center figure">
-<img alt="../../../../../_images/trussRES5.png" src="../../../../../_images/trussRES5.png" />
+<div class="section" id="results">
+<h2><span class="section-number">6.1.2. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>If the user selects <strong>Data</strong> in the <strong>RES</strong> tab, they will be presented with both a graphical plot and a tabular listing of the data.Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed, as shown in figure below.</p>
+<div class="figure align-default">
+<img alt="../../../../../_images/trussRES51.png" src="../../../../../_images/trussRES51.png" />
 </div>
 </div>
 </div>
