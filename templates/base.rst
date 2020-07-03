@@ -25,12 +25,13 @@ Problem Workflow
 
 {% endif %}
 
+
 Model Definition
 ^^^^^^^^^^^^^^^^
 
+{% if page.files %}
 The following input files must be placed in an *empty* folder:
 
-{% if page.files %}
 {% for file in page.files -%}
 
 #. ``{{ file.loc }}``: {{ file.description }}
@@ -46,7 +47,6 @@ The following input files must be placed in an *empty* folder:
 
 Results
 ^^^^^^^^^^^^^^^
-
 
 {{ page.docs.results }}
 

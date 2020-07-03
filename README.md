@@ -26,7 +26,6 @@ Proposed script naming convention:
 - `model.py`, `model.tcl`: a file that defines a FE model, but does not include post processing
 - `fem.py`, `fem.tcl`: a file that defines a FE model *and* the post-processing routine.
 
-
 --------------------------------------
 
 **SAMPLE EXAMPLE STRUCTURE:**

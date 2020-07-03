@@ -81,34 +81,34 @@ FE_MODELS:
         title: elastic modulus
         distribution: Weibull
         refCount: 1
-        scaleparam: 210
-        shapeparam: 20
+        scaleparam: 210.0
+        shapeparam: 20.0
         value: RV.E
         variableClass: Uncertain
       - name: P
         title: load magnitude
         distribution: Beta
-        alphas: 2
-        betas: 2
-        lowerbound: 20
+        alphas: 2.0
+        betas: 2.0
+        lowerbound: 20.0
         refCount: 1
-        upperbound: 30
+        upperbound: 30.0
         value: RV.P
         variableClass: Uncertain
       - name: Ao
         title: cross sectional area for the other six bars
         distribution: Lognormal
-        mean: 250
+        mean: 250.0
         refCount: 1
-        stdDev: 50
+        stdDev: 50.0
         value: RV.Ao
         variableClass: Uncertain
       - name: Au
         title: cross sectional area for the upper three bars
         distribution: Normal
-        mean: 500
+        mean: 500.0
         refCount: 1
-        stdDev: 100
+        stdDev: 100.0
         value: RV.Au
         variableClass: Uncertain
   FRAME: &FRAME
@@ -135,18 +135,18 @@ FE_MODELS:
     randomVariables:
       - name: Ic1
         distribution: ContinuousDesign
-        initialpoint: 1500
-        lowerbound: 500
+        initialpoint: 1500.0
+        lowerbound: 500.0
         refCount: 2
-        upperbound: 2000
+        upperbound: 2000.0
         value: RV.Ic1
         variableClass: Design
       - name: Ic2
         distribution: ContinuousDesign
-        initialpoint: 500
-        lowerbound: 500
+        initialpoint: 500.0
+        lowerbound: 500.0
         refCount: 2
-        upperbound: 2000
+        upperbound: 2000.0
         value: RV.Ic2
         variableClass: Design
   ROSEN: &ROSEN
@@ -222,7 +222,6 @@ quoFEM:
       model_fig: "truss/truss.png"
       results:  If the user selects **Data** in the **RES** tab, they will be presented with both a graphical plot and a tabular listing of the data.Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed, as shown in figure below.
       res_fig: "truss/trussRES5.png"
-    srcDir: "truss"
     input:
       <<: *TRUSS
       UQ_Method:  {<<: *FWD_LHS}
@@ -235,7 +234,6 @@ quoFEM:
       model_fig: truss/truss.png
       results: Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right- and left-clicks, a frequency and CDF will be displayed, as shown in figure below.
       res_fig: truss/trussRES5.png
-    srcDir: "truss"
     input:
       <<: *TRUSS
       fem:
@@ -290,7 +288,6 @@ quoFEM:
       model_fig: ~
       results: ~
       res_fig: ~
-    srcDir: "rosenbrock"
     input:
       <<: *ROSEN
       UQ_Method: {<<: *FWD_LHS}
@@ -301,7 +298,6 @@ quoFEM:
       << : *rosenbrock
       synopsis: In this example, quoFEM is used to solve a classical optimization problem, for which an analytic solution is known.
       results: ~
-    srcDir: "rosenbrock"
     input:
       <<: *ROSEN
       UQ_Method: {<<: *CON_CAL}
@@ -318,11 +314,9 @@ quoFEM:
 
         What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, `m1` and `m2`, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:
 
-
       results: >
         Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the figure below. The figure shows that Dakota returned estimates of our unknown parameters to be $m1=0.515549$ and $m2=0.256492$.
       res_fig: frame/joelRES.png
-    srcDir: "frame"
     input:
       <<: *FRAME
       UQ_Method: {<<: *CON_CAL}
@@ -335,7 +329,6 @@ quoFEM:
       UQ_Method: {<<: *BAY_CAL}
   - id: quo-09
     title: Forward Propagation - FEAP
-    srcDir: "truss"
     input:
       <<: *TRUSS
       fem:
