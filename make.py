@@ -30,7 +30,7 @@ FILE_VARS = {
 
 def _pandoc(inputs: str, t: str):
     arguments = ['pandoc', '-f', 'markdown', '-t', t, '--wrap=preserve']
-
+    print(inputs)
     p = subprocess.Popen(
             arguments,
             stdin=subprocess.PIPE,
@@ -61,7 +61,7 @@ def rv_filter(in_dict):
         var['title'] = rv_dict['title']
         var['name'] = rv_dict['name']
         out.append(var)
-        print(var)
+        # print(var)
     return out
     
 def _md2rst(ex):
@@ -113,7 +113,7 @@ def make_dir(ex, folder, filter = lambda x: x):
             src = os.path.join('static', file['loc'])
             try: 
                 shutil.copyfile(src, os.path.join(build_path, filename))
-                print( os.path.join(build_path, file['loc']))
+                # print( os.path.join(build_path, file['loc']))
             except Exception as e: print(e)
 
 
