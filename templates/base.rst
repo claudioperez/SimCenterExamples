@@ -50,6 +50,3 @@ Results
 
 {{ page.docs.results }}
 
-.. figure:: {{ page.docs.res_fig }}
-   :align: center
-   :figclass: align-center

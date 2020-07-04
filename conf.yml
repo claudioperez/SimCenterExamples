@@ -310,13 +310,16 @@ quoFEM:
 
         ![](frame/joelFrame.png) \
         
-        Consider the two-story building structure shown above. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10' are measured as are the lengths of the building along the X and Y direction, which are measured at $33'-4"$ and $30'$. For the steel columns, elastic modulus is measured to be $29,000 \mathrm{ksi}$, $Area=110 \mathrm{in}^2$, and $I_{xx}=1190 \mathrm{in}^4$. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.
+        Consider the two-story building structure shown above. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10' are measured as are the lengths of the building along the X and Y direction, which are measured at $33'-4"$ and $30'$. For the steel columns, elastic modulus is measured to be $29,000 \mathrm{ksi}$, $\mathrm{Area}=110 \mathrm{in}^2$, and $I_{xx}=1190 \mathrm{in}^4$. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.
 
         What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, `m1` and `m2`, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:
 
       results: >
         Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the figure below. The figure shows that Dakota returned estimates of our unknown parameters to be $m1=0.515549$ and $m2=0.256492$.
-      res_fig: frame/joelRES.png
+
+        ![](frame/joelRES.png)
+
+      # res_fig: frame/joelRES.png
     input:
       <<: *FRAME
       UQ_Method: {<<: *CON_CAL}
@@ -340,5 +343,4 @@ quoFEM:
         postprocessScript: ""
         program: FEAPpv
       UQ_Method:  {<<: *FWD_LHS}
-
 
