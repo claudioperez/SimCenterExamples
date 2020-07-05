@@ -51,10 +51,17 @@ def _pandoc(inputs: str, t: str):
 #         if 'title' in v: dic[k] = dic.pop(v['title'])
 def schema_table(input,schema):
     out=[]
-    for Prop in schema:
-        out.append([schema[Prop]['title'], input[Prop]])
+    for Prop in schema['options']:
+        if Prop in input:
+            for prop in schema['properties'][Prop]['properties']:
+                # print(Prop)
+                print(prop, Prop)
+                # try: out.join('{}, {}\n'.format([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]]))
+                try: out.append([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]])
+                except Exception as e: print(e) 
+                # except Exception as e: print(e)
     return out
-    
+
 def rv_filter(in_dict):
     out = []
     for rv_dict in in_dict:
@@ -94,6 +101,7 @@ def make_doc(ex: dict, folder: str, template='base.rst', ext = '.rst'):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, 'templates')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
+    env.filters['schema_table'] = schema_table
     tm = env.get_template(template)
     
     _md2rst(ex) # convert docstrings from md to rst
@@ -127,10 +135,11 @@ def make_dir(ex, folder, filter = lambda x: x):
             except Exception as e: print(e)
 
 
-def make_all(app_name, to_ext='.rst'):
+def make_all(app_name, schema, to_ext='.rst'):
     with open('conf.yml') as file: index = dict(yaml.load(file))
 
     for ex in index[app_name]:
+        ex['schema'] = schema
         # print(ex); input()
         # create .rst files
         if 'docs' in ex:
@@ -145,5 +154,4 @@ if __name__ == "__main__":
     #app_name = 'WE-UQ'
     app_name = 'quoFEM'
     #app_name = 'pelicun'
-
-    make_all(app_name)
+    make_all(app_name, schema)

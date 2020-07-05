@@ -7,6 +7,15 @@
 {% endfor %}
 {% endmacro %}
 
+{% macro UQ_Method(obj_list) %} 
+|   |   |
+|---|---| 
+{% for opt in obj_list -%}
+| {{ opt[0] }} | {{ opt[1] }} |
+
+{% endfor %}
+{% endmacro %}
+
 {{ page.title }}
 ============================================================
 
@@ -16,12 +25,16 @@
 
 {{ random_variables(page.rvars) }}
 
+
 .. 
    .. figure:: {{ page.docs.model_fig }}
       :align: center
       :width: 600
       :figclass: align-center
 
+{{ page.input.UQ_Method|schema_table(page.schema.properties.UQ_Method) }}
+
+{{ UQ_Method(page.input.UQ_Method|schema_table(page.schema.properties.UQ_Method)) }}
 
 {% if page.docs.workflow %}
 Problem Workflow
