@@ -13,12 +13,17 @@ from ruamel_yaml import YAML
 yaml=YAML(typ='rt')
 
 
+
+
 _BUILD_DIR = 'C:\\Users\\claud\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
 
-SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json").read()
-schema = json.loads(SCHEMA)
-RV_SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/RV_Schema.json").read()
-rv_schema = json.loads(RV_SCHEMA)
+# SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json").read()
+# schema = json.loads(SCHEMA)
+# RV_SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/RV_Schema.json").read()
+# rv_schema = json.loads(RV_SCHEMA)
+sdir = "C:\\Users\\claud\\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\schemas\\"
+with open(sdir + "quoFEM_Schema.json") as f : schema = json.load(f)
+with open(sdir + "RV_Schema.json") as f : rv_schema = json.load(f)
 
 
 FILE_VARS = {
@@ -30,7 +35,7 @@ FILE_VARS = {
 
 def _pandoc(inputs: str, t: str):
     arguments = ['pandoc', '-f', 'markdown', '-t', t, '--wrap=preserve']
-    print(inputs)
+    # print(inputs)
     p = subprocess.Popen(
             arguments,
             stdin=subprocess.PIPE,
@@ -44,7 +49,12 @@ def _pandoc(inputs: str, t: str):
 # def tab_titles(dic):
 #     for k, v in schema.items():
 #         if 'title' in v: dic[k] = dic.pop(v['title'])
-
+def schema_table(input,schema):
+    out=[]
+    for Prop in schema:
+        out.append([schema[Prop]['title'], input[Prop]])
+    return out
+    
 def rv_filter(in_dict):
     out = []
     for rv_dict in in_dict:
@@ -93,7 +103,7 @@ def make_doc(ex: dict, folder: str, template='base.rst', ext = '.rst'):
     with open(filename , 'w') as f: f.write(page)
 
 
-    copy_tree('static', _BUILD_DIR + '\\' + folder)
+    copy_tree( 'static', _BUILD_DIR + '\\' + folder )
 
 
 def make_dir(ex, folder, filter = lambda x: x):

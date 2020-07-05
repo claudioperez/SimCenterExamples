@@ -5,6 +5,15 @@
 - [ ] Why is the preprocessing script an option?
 - [ ] Remove COV from example 6.1.
 
+- [x] 1. OPS/TCL
+- [ ] 2
+- [ ] 3
+- [ ] 4 stuck at `Processing Results`
+- [x] 5
+- [x] 6
+- [x] 7
+- [ ] 8 stuck at `Processing Results`
+
 ## Example Builder Tool
 
 - Build multiple examples of various analysis routines from shared model definitions.
