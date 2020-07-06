@@ -35,7 +35,7 @@ FILE_VARS = {
 }
 
 def _pandoc(inputs: str, t: str):
-    arguments = ['pandoc', '-f', 'markdown', '-t', t, '--wrap=preserve']
+    arguments = ['pandoc', '-f', 'markdown', '-t', t]
     p = subprocess.Popen(
             arguments,
             stdin=subprocess.PIPE,
@@ -106,7 +106,7 @@ def make_doc(ex: dict, folder: str, template='example.md', ext = '.rst'):
     page = tm.render(page=ex)
     # _md2rst(ex) # convert docstrings from md to rst
     
-    with open(filename , 'w') as f: f.write(_pandoc(page, 'rst'))
+    with open(filename , 'w', encoding="UTF-8") as f: f.write(_pandoc(page, 'rst'))
     copy_tree( 'static', _BUILD_DIR + '\\' + folder )
 
 

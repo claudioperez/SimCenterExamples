@@ -157,7 +157,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../../../_sources/common/user_manual/examples/desktop/quoFEM/.archive/FramePeriod.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../../../_sources/common/user_manual/examples/desktop/quoFEM/_archive/FramePeriod.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,7 +172,7 @@
             
   <div class="section" id="steel-frame-parameter-estimation">
 <h1>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
-<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">lblJoelFrame</span></code>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10' are measured as are the lengths of the building along the X and Y direction, which are measured at 33'4&quot; and 30'. For the steel columns, Young's modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
+<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">lblJoelFrame</span></code>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
 <div class="align-center figure" id="id1">
 <span id="lbljoelframe"></span><a class="reference internal image-reference" href="../../../../../../_images/joelFrame.png"><img alt="../../../../../../_images/joelFrame.png" src="../../../../../../_images/joelFrame.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
@@ -320,7 +320,7 @@ close $outFile
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors. We used 'dT1' and 'dT2' due to our affinity for 3 letter acronyms!</p>
+<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors. We used ‘dT1’ and ‘dT2’ due to our affinity for 3 letter acronyms!</p>
 </div>
 <ol class="arabic simple" start="5">
 <li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch Dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters to be <span class="math notranslate nohighlight">\(m1=0.52 (0.515549)\)</span> and <span class="math notranslate nohighlight">\(m2=0.26 (0.256492)\)</span>.</p></li>
@@ -331,7 +331,7 @@ close $outFile
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ol class="arabic simple">
-<li><p>The computed values compare favorably to the values used to generate the 'observed results' when developing this problem, these being the values shown in the script, i.e. <span class="math notranslate nohighlight">\(m1=0.52\)</span> and <span class="math notranslate nohighlight">\(m2=0.26\)</span>.</p></li>
+<li><p>The computed values compare favorably to the values used to generate the ‘observed results’ when developing this problem, these being the values shown in the script, i.e. <span class="math notranslate nohighlight">\(m1=0.52\)</span> and <span class="math notranslate nohighlight">\(m2=0.26\)</span>.</p></li>
 <li><p>It would prove useful for you to adjust the parameters, observed values and inputs for the continuous design variables. The numbers were chosen to demonstrate the methods can give good results. They do not always return such good numbers.</p></li>
 </ol>
 </div>

@@ -108,8 +108,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Input File Schema</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#uq-tab">6.1. UQ tab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fem">6.2. FEM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qoi">6.3. QoI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fem-tab">6.2. FEM tab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rv-tab">6.3. RV tab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qoi">6.4. QoI</a></li>
 </ul>
 </li>
 </ul>
@@ -439,8 +440,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="fem">
-<h2><span class="section-number">6.2. </span>FEM<a class="headerlink" href="#fem" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fem-tab">
+<h2><span class="section-number">6.2. </span>FEM tab<a class="headerlink" href="#fem-tab" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -525,8 +526,77 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="rv-tab">
+<h2><span class="section-number">6.3. </span>RV tab<a class="headerlink" href="#rv-tab" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="3"><p><em>array</em></p></td>
+</tr>
+<tr class="row-even"><td colspan="4"><p>items</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="8"><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td colspan="2"><p><em>object</em></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>properties</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><strong>distribution</strong></p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><strong>name</strong></p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><strong>refCount</strong></p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>integer</em></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>stdDev</p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><strong>value</strong></p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><strong>variableClass</strong></p></li>
+</ul>
+</td>
+<td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="qoi">
-<h2><span class="section-number">6.3. </span>QoI<a class="headerlink" href="#qoi" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.4. </span>QoI<a class="headerlink" href="#qoi" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />

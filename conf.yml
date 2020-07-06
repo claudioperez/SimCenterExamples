@@ -37,8 +37,8 @@ UQ_METHOD:
     uqType: Parameters Estimation
   BAY_CAL:  &BAY_CAL
     bayesianCalibrationMethodData:
-      burnInSamples: 100
-      chainSamples: 400
+      burnInSamples: 10
+      chainSamples: 40
       chains: 4
       jumpStep: 5
       method: DREAM
@@ -58,7 +58,7 @@ UQ_METHOD:
   SEN_LHS:  &SEN_LHS
     samplingMethodData:
       method: LHS
-      samples: 100
+      samples: 1000
       seed: 175
     uqEngine: Dakota
     uqType: Sensitivity Analysis
@@ -194,7 +194,7 @@ FILES:
   frame:
     frame_model_tcl: &frame_model_tcl
       loc: frame/fem.tcl
-      description: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a `results.out` fils. As a consequence, no postprocessing script is needed. The values placed in `results.out` file are the difference between computed and observed values. Expressed another way, the function `f(m1,m2)` computed and written to the `results.out` file is `f(m1,m2) = ObservedPeriods - ComputedPeriods(m1,m2)`. The UQ algorithm when running is searching for values of the random variable parameters (`m1` and `m2`) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.
+      description: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a `results.out` file. As a consequence, no postprocessing script is needed. The values placed in `results.out` file are the difference between computed and observed values. Expressed another way, the function `f(Ic1,Ic2)` computed and written to the `results.out` file is `f(Ic1,Ic2) = ObservedPeriods - ComputedPeriods(Ic1,Ic2)`. The UQ algorithm when running is searching for values of the random variable parameters (`Ic1` and `Ic2`) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.
     
 ##############################################################################
 # quoFEM Examples
@@ -208,11 +208,12 @@ quoFEM:
       statement: |
         Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure. Two input scripts are used to define a forward propagation procedure to be coordinated by quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Latin hypercube sampling.
 
-        ![](truss/truss.png)
+        ![Truss schematic diagram](truss/truss.png)
       rv: |
         The following parameters are defined in the **RV** tab:
       results:  |
         The results from this analysis with a maximum of $200$ iterations are as follows: 
+        
         **Node 3**:
 
         - $\mu = 7.6986$
@@ -223,7 +224,7 @@ quoFEM:
         - $\mu = 9.3967$
         - $\sigma = 1.8628$
 
-        If the user selects **Data** in the **RES** tab, they will be presented with both a graphical plot and a tabular listing of the data.Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed.
+        If the user selects **Data** in the **RES** tab, they will be presented with both a graphical plot and a tabular listing of the data. Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed.
       
         <!-- ![Stochastic truss results.]("truss/trussRES5.png") -->
     input:
@@ -237,12 +238,22 @@ quoFEM:
       statement: >
         Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure. Two input scripts are used to define a forward propagation procedure to be coordinated by quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Latin hypercube sampling.
 
-        ![](truss/truss.png)
+        ![Truss schematic diagram](truss/truss.png)
         
       results: |
-        Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right- and left-clicks, a frequency and CDF will be displayed, as shown in figure below.
+        The results from this analysis with a maximum of $200$ iterations are as follows: 
+        
+        **Node 3**:
 
-        ![truss/trussRES5.png]()
+        - $\mu = 7.6986$
+        - $\sigma = 1.5666$
+
+        **Node 2**:
+
+        - $\mu = 9.3967$
+        - $\sigma = 1.8628$
+
+        If the user selects **Data** in the **RES** tab, they will be presented with both a graphical plot and a tabular listing of the data. Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed.
     input:
       <<: *TRUSS
       fem:
@@ -264,9 +275,11 @@ quoFEM:
       statement: >
         Consider the stochastic response of a two-dimensional truss structure shown in the following figure with uncertain section dimensions, material moduli, and loading magnitude. Two input scripts are used to define a [local reliability](/common/user_manual/usage/desktop/DakotaReliability.html) procedure to be coordinated by quoFEM which will estimate response magnitudes whose probabilities of exceedance are 0.02, 0.2, 0.4, 0.6, 0.8, and 0.99.
 
-        ![](truss/truss.png)
-
-      results: ~
+        ![Simple truss model.](truss/truss.png)
+      results: |
+        Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the following figure:
+         
+        ![Sensitivity analysis results.](truss/trussSORM-RES.png)
     input:
       <<: *TRUSS
       UQ_Method: {<<: *REL_SORM}
@@ -279,8 +292,10 @@ quoFEM:
         Consider a stochastic model of a two-dimensional truss structure like that shown in the following figure. A [sensitivity analysis](/common/user_manual/usage/desktop/DakotaSensitivity.html) procedure is coordinated by quoFEM which will estimate the sensitivities of the response quantities of interest with respect to the problem's random variables.
 
         ![Truss schematic diagram](truss/truss.png)
-
-      results: ~
+      results: |
+        Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the following figure:
+      
+        ![Sensitivity analysis results for simple truss.](truss/trussSensitivity-RES.png)
     input:
       <<: *TRUSS
       UQ_Method: {<<: *SEN_LHS}
@@ -317,7 +332,7 @@ quoFEM:
         This procedure is implemented with a Latin hypercube sampling routine in quoFEM by entering the following inputs in the **UQ** tab:
 
       fem: |
-        For this forward propagation problem, we need to define a Python script that will import a set of random variable values, apply them to the Rosenbrock function, then write the results to a file named `results.out` for every random variable realization generated by Dakota. To this end, we begin by defining our random variables as Python objects as follows, and supplying this as a `.py` script in the **Parameters File** field of the **FEM** tab.:
+        For this forward propagation problem, we need to define a Python script that will import a set of random variable values, apply them to the Rosenbrock function, then write the results to a file named `results.out` for every random variable realization generated by Dakota. To this end, we begin by defining our random variables as Python objects as follows, and supplying this as a `.py` script in the **Parameters File** field of the **FEM** tab:
 
         ```python
         X = 0.0
@@ -390,7 +405,7 @@ quoFEM:
         $$
 
       results: |
-        With $50$ iterations, our solution converges to $x= 1.1829$ and $y=1.4$
+        With $50$ iterations, our solution converges to $x= 0.34548$ and $y=0.11$
     input:
       <<: *ROSEN
       UQ_Method: {<<: *CON_CAL}
@@ -437,7 +452,7 @@ quoFEM:
       results: |
         Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the figure below. 
         
-        Our estimates for the column stiffnesses, `Ic1` and `Ic2` are **1168.83** and **1211.25** respectively.
+        The resulting estimates for the column stiffnesses, `Ic1` and `Ic2` are **1168.83** and **1211.25** respectively.
     input:
       <<: *FRAME
       UQ_Method: {<<: *CON_CAL}
@@ -482,11 +497,13 @@ quoFEM:
         Our goal will be to reobtain the original column moments of inertia from this data using a Bayesian calibration procedure. 
       rv: |
         The unknown quantities of interest are the moments of inertia for the first and second story columns (`Ic1` and `Ic2` respectively). Using the following bounds and initial estimates, these parameters are defined as follows in the **RV** tab of quoFEM:
-
       results: |
         Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed. 
         
-        Our estimates for the column stiffnesses, `Ic1` and `Ic2` are .
+        The resulting estimates for the column stiffnesses with 40 chain samples are as follows:
+        
+        - `Ic1`: Mean $=1229.1$, Std. Dev $=192.407$.
+        - `Ic2`: Mean $=1404.03$, Std. Dev $=253.584$.
     input:
       <<: *FRAME
       UQ_Method: {<<: *BAY_CAL}
