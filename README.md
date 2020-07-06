@@ -6,8 +6,8 @@
 - [ ] Remove COV from example 6.1.
 
 - [x] 1. OPS/TCL
-- [ ] 2
-- [ ] 3
+- [ ] 2 
+- [ ] 3 
 - [ ] 4 stuck at `Processing Results`
 - [x] 5
 - [x] 6
@@ -63,18 +63,23 @@ Explain the output that is generated and what visualizations are available from 
 
 Brief description of the example, with paragraph structure roughly as follows:
 
+[statement]
+
 1. Begin with a general problem statement.
 2. Specify specifics (e.g. dimensions, parameters, etc.).
 
-### [H3] Workflow Description
+[files]
 
-Explain the problem workflow. This section should explain what information is passed to and from the modeling scripts introduced in the following section.
-
-### [H3] Model Definition
+### [H3] [fem]
 
 Walk user through setup of the FE model with a description of each input file used.
 
-### [H3] Post-processing
+### [H3] [uq]
+
+Explain the problem workflow. This section should explain what information is passed to and from the modeling scripts introduced in the following section.
+
+
+### [H3] Results
 
 Explain the output that is generated and what visualizations are available from the GUI.
 

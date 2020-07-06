@@ -1,3 +1,3 @@
 
-X = None
-Y = None
+X = 0.0
+Y = 0.0

@@ -12,8 +12,8 @@ def rosenbrock(x, y):
 	b = 100.
 	return (a - x)**2. + b*(y - x**2.)**2.
 
-
-with open('results.out', 'w') as f:
-	result = rosenbrock(X, Y)
-	f.write('{:.60g}'.format(result))
+if __name__ == "__main__":
+	with open('results.out', 'w') as f:
+		result = rosenbrock(X, Y)
+		f.write('{:.60g}'.format(result))
 

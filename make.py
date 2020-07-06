@@ -35,7 +35,6 @@ FILE_VARS = {
 
 def _pandoc(inputs: str, t: str):
     arguments = ['pandoc', '-f', 'markdown', '-t', t, '--wrap=preserve']
-    # print(inputs)
     p = subprocess.Popen(
             arguments,
             stdin=subprocess.PIPE,
@@ -49,17 +48,15 @@ def _pandoc(inputs: str, t: str):
 # def tab_titles(dic):
 #     for k, v in schema.items():
 #         if 'title' in v: dic[k] = dic.pop(v['title'])
-def schema_table(input,schema):
+def schemaTable(input,schema):
     out=[]
     for Prop in schema['options']:
         if Prop in input:
             for prop in schema['properties'][Prop]['properties']:
-                # print(Prop)
-                print(prop, Prop)
+                # print(prop, Prop)
                 # try: out.join('{}, {}\n'.format([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]]))
                 try: out.append([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]])
-                except Exception as e: print(e) 
-                # except Exception as e: print(e)
+                except Exception as e: print(e)
     return out
 
 def rv_filter(in_dict):
@@ -67,9 +64,7 @@ def rv_filter(in_dict):
     for rv_dict in in_dict:
         var = {}
         var['distribution'] = dist = rv_dict['distribution']
-        # print(rv_schema['properties'])
         RV = rv_schema['properties'][dist.lower()]
-        print(dist)
         var['params'] = [{
             'tex': RV['properties'][prop]['tex'],
             'title': RV['properties'][prop]['title'],
@@ -87,7 +82,7 @@ def _md2rst(ex):
         if ex['docs'][key]: 
             ex['docs'][key] = _pandoc(ex['docs'][key], 'rst')
     
-def make_doc(ex: dict, folder: str, template='base.rst', ext = '.rst'):
+def make_doc(ex: dict, folder: str, template='example.md', ext = '.rst'):
     """Make a doc page for an example that is serialized in `ex`.
 
     - create _build/{{ folder }}/{{ ex[id] + ext }}
@@ -101,16 +96,21 @@ def make_doc(ex: dict, folder: str, template='base.rst', ext = '.rst'):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, 'templates')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
-    env.filters['schema_table'] = schema_table
+    env.filters['schemaTable'] = schemaTable
     tm = env.get_template(template)
     
-    _md2rst(ex) # convert docstrings from md to rst
     try: ex['rvars'] = rv_filter(ex['input']['randomVariables'])
     except: pass
+
     page = tm.render(page=ex)
-    with open(filename , 'w') as f: f.write(page)
-
-
+    # _md2rst(ex) # convert docstrings from md to rst
+    
+    with open(filename , 'w') as f: f.write(_pandoc(page, 'rst'))
+    # _md2rst(ex) # convert docstrings from md to rst
+    # try: ex['rvars'] = rv_filter(ex['input']['randomVariables'])
+    # except: pass
+    # page = tm.render(page=ex)
+    # with open(filename , 'w') as f: f.write(page)
     copy_tree( 'static', _BUILD_DIR + '\\' + folder )
 
 
