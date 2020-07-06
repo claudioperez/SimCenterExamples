@@ -24,9 +24,9 @@ Using these properties, the following set of mode shapes and frequencies are gen
    \phi_{12}^{(1)}=1.53, \quad \phi_{12}^{(2)}=1.24, \quad \phi_{12}^{(3)}=1.38, \quad \phi_{12}^{(4)}=1.50, \quad \phi_{12}^{(5)}=1.35
    \end{array}
 
-Our goal will be to reobtain the original column moments of inertias from this data using a Bayesian calibration procedure.
+Our goal will be to reobtain the original column moments of inertia from this data using a Bayesian calibration procedure.
 
-The unknown quantities of interest are the moments of inertias for the first and second story columns (``Ic1`` and ``Ic2`` respectively). Using the following bounds and initial estimates, these parameters are defined as follows in the **RV** tab of quoFEM:
+The unknown quantities of interest are the moments of inertia for the first and second story columns (``Ic1`` and ``Ic2`` respectively). Using the following bounds and initial estimates, these parameters are defined as follows in the **RV** tab of quoFEM:
 
 1. First story column moment of inertia, ``Ic1``: **Uniform** distribution with a lower bound :math:`(L_B)` of :math:`500.0`, upper bound :math:`(U_B)` of :math:`2000.0`,
 
@@ -59,7 +59,7 @@ Do not place the files in your root, downloads, or desktop folder as when the ap
 Results
 -------
 
-Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the figure below.
+Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed.
 
 Our estimates for the column stiffnesses, ``Ic1`` and ``Ic2`` are .
 

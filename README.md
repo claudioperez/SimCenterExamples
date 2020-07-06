@@ -1,54 +1,30 @@
 # Examples
 
-- [ ] Reduce reliance on screenshots; rely instead on descriptive writing.
-- [ ] Which examples will utilize a `.json` input file?
-- [ ] Why is the postprocessing script an option?
-
-
 ## Example Builder Tool
 
-- Build multiple examples of various analysis routines from shared model definitions.
-- Provides a central serialized source roster of all examples (`idx.yml`).
+- Build multiple examples of various analysis routines from shared model definition files.
+- Provides a central serialized roster of all examples (`conf.yml`).
 
 ### Workflow
 
-- Create directory with `model`, `params`, and `post`
+empty
 
 ### Schema
-
-    id: this serves as both the name of the documentation .rst file, and the name of the director which will hold the source files.
-    name:
-    srcDir:
-    input:
+|   |  |
+|---|---|
+| `id` | this serves as both the name of the documentation `.rst` file, and the name of the directory which will hold the source files. |
+| `title` | This will serve as the title of the documentation web page. |
+| `docs` | This object contains strings that are used to populate the `example.md` template with Jinja. Pandoc is then used to translate the markdown string produced by Jinja to an `.rst` file. |
+| `input` | This object comprises the information of the `input.json` file for the example. |
 
 Proposed script naming convention:
 
-- `model.py`, `model.tcl`: a file that defines a FE model, but does not include post processing
+- `model.py`, `model.tcl`: a file that defines an FE model, but does not include post processing.
 - `fem.py`, `fem.tcl`: a file that defines a FE model *and* the post-processing routine.
-
---------------------------------------
-
-**SAMPLE EXAMPLE STRUCTURE:**
-
-## [H2] Example name
-
-Brief description of the example, with paragraph structure roughly as follows:
-
-1. Begin with a general problem statement.
-2. Specify specifics (e.g. dimensions, parameters, etc.).
-3. Introduce problem input files.
-
-### [H3] Pre-processing
-
-Walk user through setup, including a description of each input file used.
-
-### [H3] Post-processing
-
-Explain the output that is generated and what visualizations are available from the GUI.
 
 -------------------------------------------
 
-**ALTERNATE EXAMPLE STRUCTURE:**
+**SAMPLE EXAMPLE STRUCTURE:**
 
 ## [H2] Example name
 
