@@ -6,7 +6,7 @@
 {% macro random_variables(obj_list) %}
 
 {% for rvar in obj_list -%}
-1. {{ sentence_case(rvar.title) }}, `{{ rvar.name }}`: **{{ rvar.distribution }}** distribution with a {% for param in rvar.params %} {{ param.title }} $({{ param.tex }})$ of {{ param.value }}, {% endfor %}
+1. {{ sentence_case(rvar.title) }}, `{{ rvar.name }}`: **{{ rvar.distribution }}** distribution with a {% for param in rvar.params %} {{ param.title }} $({{ param.tex }})$ of ${{ param.value }}$, {% endfor %}
 
 {% endfor %}
 {% endmacro %}
@@ -26,10 +26,9 @@
 
 {% macro list_files(data) %}
 {% for file in data.files -%}
-#. ``{{ file.loc }}``: {{ file.description }}
+#. [{{file.loc|basename}}](https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/{{ file.loc }}): {{ file.description }}
 
 {% endfor %}
 .. warning::
-
    Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!
 {% endmacro %}

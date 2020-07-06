@@ -191,21 +191,38 @@
             
   <div class="section" id="basic-modeling-with-python">
 <h1><span class="section-number">6.1. </span>Basic modeling with Python<a class="headerlink" href="#basic-modeling-with-python" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem folder</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-05">quo-05</a></p></td>
+</tr>
+</tbody>
+</table>
 <p>This example illustrates how Python scripting can be used with quoFEM to express general mathematical models without the use of a dedicated finite element analysis engine.</p>
 <p>The Rosenbrock function is a <em>test function</em> that is often used to evaluate numerical optimization algorithms. It is given by the following expression:</p>
 <div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-0">
-<span class="eqno">(6.1.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-0" title="Permalink to this equation">¶</a></span>\[f(x, y)=(a-x)^{2}+b\left(y-x^{2}\right)^{2}\]</div>
+<span class="eqno">(6.1.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-0" title="Permalink to this equation">¶</a></span>\[g(x, y)=(a-x)^{2}+b\left(y-x^{2}\right)^{2}\]</div>
 <p>A forward propagation analysis will be conducted to numerically integrate the first and second moments of a random variable whose value is obtained by applying the Rosenbrock function to the two following statistically independent random variables:</p>
 <ol class="arabic simple">
-<li><p>First variable, <code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of -2.0, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 2.0,</p></li>
-<li><p>Second variable, <code class="docutils literal notranslate"><span class="pre">Y</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 1.4, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 1.6,</p></li>
+<li><p>First variable, <code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(-2.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(2.0\)</span>,</p></li>
+<li><p>Second variable, <code class="docutils literal notranslate"><span class="pre">Y</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(1.4\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(1.6\)</span>,</p></li>
 </ol>
 <div class="section" id="uq-workflow">
 <h2><span class="section-number">6.1.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
 <p>The objective of this UQ problem is to numerically integrate the following integrals with a forward propagation routine:</p>
 <div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-1">
-<span class="eqno">(6.1.2)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-1" title="Permalink to this equation">¶</a></span>\[\mu_f = \int^{1.6}_{1.4} \int^\{2.0}_{-2.0} f(x,y) \operatorname{p_f} (x,y) dx dy\]</div>
-<p>where <span class="math notranslate nohighlight">\(\operatorname{p_f}(x,y)\)</span> is the joint probability density function of the random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<span class="eqno">(6.1.2)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-1" title="Permalink to this equation">¶</a></span>\[\mu_g = \mathbf{E}[g(X,Y)] = \int^{1.6}_{1.4} \int^{2.0}_{-2.0} g(x,y) f_{XY} (x,y) dx dy\]</div>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-2">
+<span class="eqno">(6.1.3)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+\sigma_g^2 &amp;= \mathbf{E}[(g(X,Y)-\mathbf{E}[g(X,Y)])^2] \\
+&amp;= \int^{1.6}_{1.4} \int^{2.0}_{-2.0} (g(x,y)-\mathbf{E}[g(X,Y)])^2f_{XY} (x,y) dx dy
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> is the joint probability density function of the random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>This procedure is implemented with a Latin hypercube sampling routine in quoFEM by entering the following inputs in the <strong>UQ</strong> tab:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 79%" />
@@ -216,7 +233,7 @@
 <td><p>LHS</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Samples</strong></p></td>
-<td><p>100</p></td>
+<td><p>200</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Seed</strong></p></td>
 <td><p>949</p></td>
@@ -226,14 +243,14 @@
 </div>
 <div class="section" id="model-files">
 <h2><span class="section-number">6.1.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
-<p>For this forward propagation problem, we need to define a Python script that will import a set of random variable values, apply them to the Rosenmbrock function, then write the results to a file named <code class="docutils literal notranslate"><span class="pre">results.out</span></code> for every random variable realization generated by Dakota. To this end, we begin by defining our random variables as Python objects as follows, and supplying this as a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script in the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab.:</p>
+<p>For this forward propagation problem, we need to define a Python script that will import a set of random variable values, apply them to the Rosenbrock function, then write the results to a file named <code class="docutils literal notranslate"><span class="pre">results.out</span></code> for every random variable realization generated by Dakota. To this end, we begin by defining our random variables as Python objects as follows, and supplying this as a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script in the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab.:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 <p>Although this file will later be used as a Python module, it is important to note that in the quoFEM workflow, it is NOT handled as a true Python script. Rather, it can be thought of loosely as analogous to a C ?header file? in that it simply gives us an interface to Dakota from Python. The values assigned to the variables at this point will not be used.</p>
 <blockquote>
-<div><p><strong>Note</strong>: The <strong>Parameters File</strong> is not a true Python script; For the time being, until further documentation about the tool is developed, users should only use line-by-line variable definitions in this file. Python assignments like <code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">Y</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">None</span></code> are not supported.</p>
+<div><p><strong>Note</strong>: The <strong>Parameters File</strong> is not a true Python script; For the time being, until further documentation about the tool is developed, users should only use line-by-line variable definitions in this file. Python assignments like <code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">Y</span> <span class="pre">=</span> <span class="pre">0.0,</span> <span class="pre">0.0</span></code> are not supported.</p>
 </div></blockquote>
 <p>We can now implement our model for the <strong>Input File</strong> which will begin with a star-import from the parameters file we just created. Assuming that file was named <code class="docutils literal notranslate"><span class="pre">params.py</span></code>, this import would look like so:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">params</span> <span class="kn">import</span> <span class="o">*</span>
@@ -246,22 +263,25 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span>
 </pre></div>
 </div>
-<p>Finally, we apply our <code class="docutils literal notranslate"><span class="pre">rosenbrock</span></code> function to the variables we imported from <code class="docutils literal notranslate"><span class="pre">params</span></code>, and write the results to a file called <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. Note that throughout the forward propagation routine, the values assigned to the variables <code class="docutils literal notranslate"><span class="pre">var1</span></code> and <code class="docutils literal notranslate"><span class="pre">var2</span></code> in the <code class="docutils literal notranslate"><span class="pre">params</span></code> interface are varied by the workflow application.</p>
+<p>Finally, we apply our <code class="docutils literal notranslate"><span class="pre">rosenbrock</span></code> function to the variables we imported from <code class="docutils literal notranslate"><span class="pre">params</span></code>, and write the results to a file called <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. Note that throughout the forward propagation routine, the values assigned to the variables <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> in the <code class="docutils literal notranslate"><span class="pre">params</span></code> interface are varied by the workflow application.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;results.out&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.60g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The code from these steps is colleted and made available for download in the following files:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rosenbrock/rosenbrock.py</span></code>: This file is a Python script which implements the Rosenbrock function. It is supplied to the <strong>Input Script</strong> field of the <strong>FEM</strong> tab. Because this file write directly to <code class="docutils literal notranslate"><span class="pre">results.out</span></code>, it obviates the need for supplying a <strong>Postprocess Script</strong>. When invoked in the workflow, the Python routine is supplied a set of random variable realizations through the star-import of the script supplied to the <strong>Parameters File</strong> field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rosenbrock/params.py</span></code>: This file is a Python script which defines the problem?s random variables as objects in the Python runtime. It is supplied to the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab. <em>The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.</em></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/rosenbrock.py">rosenbrock.py</a>: This file is a Python script which implements the Rosenbrock function. It is supplied to the <strong>Input Script</strong> field of the <strong>FEM</strong> tab. Because this file write directly to <code class="docutils literal notranslate"><span class="pre">results.out</span></code>, it obviates the need for supplying a <strong>Postprocess Script</strong>. When invoked in the workflow, the Python routine is supplied a set of random variable realizations through the star-import of the script supplied to the <strong>Parameters File</strong> field.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/params.py">params.py</a>: This file is a Python script which defines the problem?s random variables as objects in the Python runtime. It is supplied to the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab. <em>The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.</em></p></li>
 </ol>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
 <div class="section" id="results">
 <h2><span class="section-number">6.1.3. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
-<p>None</p>
+<p>The result for a forward propagation run with a maximum of <span class="math notranslate nohighlight">\(200\)</span> iterations is:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-3">
+<span class="eqno">(6.1.4)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\mu_g = 146.519 \\
+\sigma_g = 134.01\end{split}\]</div>
 </div>
 </div>
 

@@ -2,17 +2,8 @@
 
 - [ ] Reduce reliance on screenshots; rely instead on descriptive writing.
 - [ ] Which examples will utilize a `.json` input file?
-- [ ] Why is the preprocessing script an option?
-- [ ] Remove COV from example 6.1.
+- [ ] Why is the postprocessing script an option?
 
-- [x] 1. OPS/TCL
-- [ ] 2 
-- [ ] 3 
-- [ ] 4 stuck at `Processing Results`
-- [x] 5
-- [x] 6
-- [x] 7
-- [ ] 8 stuck at `Processing Results`
 
 ## Example Builder Tool
 

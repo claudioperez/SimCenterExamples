@@ -14,13 +14,14 @@ yaml=YAML(typ='rt')
 
 
 
-
+# _BUILD_DIR = '..\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
 _BUILD_DIR = 'C:\\Users\\claud\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
 
 # SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json").read()
 # schema = json.loads(SCHEMA)
 # RV_SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/RV_Schema.json").read()
 # rv_schema = json.loads(RV_SCHEMA)
+
 sdir = "C:\\Users\\claud\\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\schemas\\"
 with open(sdir + "quoFEM_Schema.json") as f : schema = json.load(f)
 with open(sdir + "RV_Schema.json") as f : rv_schema = json.load(f)
@@ -53,7 +54,6 @@ def schemaTable(input,schema):
     for Prop in schema['options']:
         if Prop in input:
             for prop in schema['properties'][Prop]['properties']:
-                # print(prop, Prop)
                 # try: out.join('{}, {}\n'.format([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]]))
                 try: out.append([schema['properties'][Prop]['properties'][prop]['title'], input[Prop][prop]])
                 except Exception as e: print(e)
@@ -97,20 +97,16 @@ def make_doc(ex: dict, folder: str, template='example.md', ext = '.rst'):
     templates_dir = os.path.join(root, 'templates')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
     env.filters['schemaTable'] = schemaTable
+    env.filters['basename'] = lambda path: os.path.basename(path)
     tm = env.get_template(template)
     
     try: ex['rvars'] = rv_filter(ex['input']['randomVariables'])
-    except: pass
+    except Exception as e: print(e, ex['id'])
 
     page = tm.render(page=ex)
     # _md2rst(ex) # convert docstrings from md to rst
     
     with open(filename , 'w') as f: f.write(_pandoc(page, 'rst'))
-    # _md2rst(ex) # convert docstrings from md to rst
-    # try: ex['rvars'] = rv_filter(ex['input']['randomVariables'])
-    # except: pass
-    # page = tm.render(page=ex)
-    # with open(filename , 'w') as f: f.write(page)
     copy_tree( 'static', _BUILD_DIR + '\\' + folder )
 
 
@@ -129,9 +125,7 @@ def make_dir(ex, folder, filter = lambda x: x):
         for file in ex['files']: 
             filename = os.path.split(file['loc'])[1]
             src = os.path.join('static', file['loc'])
-            try: 
-                shutil.copyfile(src, os.path.join(build_path, filename))
-                # print( os.path.join(build_path, file['loc']))
+            try:  shutil.copyfile(src, os.path.join(build_path, filename))
             except Exception as e: print(e)
 
 
@@ -155,3 +149,4 @@ if __name__ == "__main__":
     app_name = 'quoFEM'
     #app_name = 'pelicun'
     make_all(app_name, schema)
+

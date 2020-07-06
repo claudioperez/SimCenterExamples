@@ -191,15 +191,26 @@
             
   <div class="section" id="forward-propagation-opensees-tcl">
 <h1><span class="section-number">6.2. </span>Forward Propagation - OpenSees/Tcl<a class="headerlink" href="#forward-propagation-opensees-tcl" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem folder</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-01">quo-01</a></p></td>
+</tr>
+</tbody>
+</table>
 <p>This example uses quoFEM to estimate the first and second central moments of a FE model?s response, given the marginal distributions of various random parameters.</p>
 <p>Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure. Two input scripts are used to define a forward propagation procedure to be coordinated by quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Latin hypercube sampling.</p>
 <p><img alt="image0" src="../../../../../_images/truss1.png" /></p>
 <p>The following parameters are defined in the <strong>RV</strong> tab:</p>
 <ol class="arabic simple">
-<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: <strong>Weibull</strong> distribution with a scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of 210.0, shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of 20.0,</p></li>
-<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: <strong>Beta</strong> distribution with a first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of 2.0, second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of 2.0, lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 20.0, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 30.0,</p></li>
-<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: <strong>Lognormal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 250.0, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 50.0,</p></li>
-<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: <strong>Normal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 500.0, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 100.0,</p></li>
+<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: <strong>Weibull</strong> distribution with a scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of <span class="math notranslate nohighlight">\(210.0\)</span>, shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of <span class="math notranslate nohighlight">\(20.0\)</span>,</p></li>
+<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: <strong>Beta</strong> distribution with a first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of <span class="math notranslate nohighlight">\(2.0\)</span>, second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of <span class="math notranslate nohighlight">\(2.0\)</span>, lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(20.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(30.0\)</span>,</p></li>
+<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: <strong>Lognormal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of <span class="math notranslate nohighlight">\(250.0\)</span>, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of <span class="math notranslate nohighlight">\(50.0\)</span>,</p></li>
+<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: <strong>Normal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of <span class="math notranslate nohighlight">\(100.0\)</span>,</p></li>
 </ol>
 <div class="section" id="uq-workflow">
 <h2><span class="section-number">6.2.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
@@ -214,7 +225,7 @@
 <td><p>LHS</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Samples</strong></p></td>
-<td><p>100</p></td>
+<td><p>200</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Seed</strong></p></td>
 <td><p>949</p></td>
@@ -226,19 +237,26 @@
 <h2><span class="section-number">6.2.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
 <p>The following files make up the <strong>FEM</strong> model definition.</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truss/model.tcl</span></code>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem?s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">truss/post.tcl</span></code>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <code class="docutils literal notranslate"><span class="pre">results.out</span></code> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/truss/model.tcl">model.tcl</a>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem?s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/truss/post.tcl">post.tcl</a>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <code class="docutils literal notranslate"><span class="pre">results.out</span></code> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
 </ol>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
 <div class="section" id="results">
 <h2><span class="section-number">6.2.3. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
-<p>If the user selects <strong>Data</strong> in the <strong>RES</strong> tab, they will be presented with both a graphical plot and a tabular listing of the data.Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed, as shown in figure below.</p>
-<div class="figure align-default" id="id1">
-<img alt="Stochastic truss results." src="common\user_manual\examples\desktop\quoFEM\%22truss/trussRES5.png%22" />
-<p class="caption"><span class="caption-number">Fig. 6.2.1 </span><span class="caption-text">Stochastic truss results.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-</div>
+<p>The results from this analysis with a maximum of <span class="math notranslate nohighlight">\(200\)</span> iterations are as follows:
+<strong>Node 3</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu = 7.6986\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma = 1.5666\)</span></p></li>
+</ul>
+<p><strong>Node 2</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu = 9.3967\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma = 1.8628\)</span></p></li>
+</ul>
+<p>If the user selects <strong>Data</strong> in the <strong>RES</strong> tab, they will be presented with both a graphical plot and a tabular listing of the data.Various views of the graphical display can be obtained by left- and right-clicking the columns of the tabular data. If a singular column of the tabular data is selected with simultaneous right and left clicks, a frequency and CDF will be displayed.</p>
+<!-- ![Stochastic truss results.]("truss/trussRES5.png") --></div>
 </div>
 
 

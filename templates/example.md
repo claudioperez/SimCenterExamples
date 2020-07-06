@@ -2,6 +2,10 @@
 
 # {{ page.title }}
 
+|  |  |
+|---|---|
+| Problem folder | [{{page.id}}](https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/{{page.id}}) |
+
 {{page.docs.synopsis}}
 
 {{page.docs.statement}}

@@ -191,6 +191,17 @@
             
   <div class="section" id="conventional-calibration-steel-frame">
 <h1><span class="section-number">6.7. </span>Conventional Calibration - Steel Frame<a class="headerlink" href="#conventional-calibration-steel-frame" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem folder</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-07">quo-07</a></p></td>
+</tr>
+</tbody>
+</table>
 <p>In this example, a parameter estimation routine is used to estimate column stiffnesses of a simple steel frame, given data about it?s mode shapes and mass distribution.</p>
 <p>Provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, this example looks at the following simplified finite element model of a steel building.</p>
 <div class="line-block">
@@ -205,6 +216,10 @@
 \end{array}\end{split}\]</div>
 <p>Our goal will be to reobtain the original column moments of inertias from this data using a conventional calibration procedure.</p>
 <p>The unknown quantities of interest are the moments of inertias for the first and second story columns (<code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code> respectively). Using the following bounds and initial estimates, these parameters are defined as follows in the <strong>RV</strong> tab of quoFEM:</p>
+<ol class="arabic simple">
+<li><p>First story column moment of inertia, <code class="docutils literal notranslate"><span class="pre">Ic1</span></code>: <strong>ContinuousDesign</strong> distribution with a initial point <span class="math notranslate nohighlight">\((X_0)\)</span> of <span class="math notranslate nohighlight">\(1500.0\)</span>, lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(2000.0\)</span>,</p></li>
+<li><p>Second story column moment of inertia, <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>: <strong>ContinuousDesign</strong> distribution with a initial point <span class="math notranslate nohighlight">\((X_0)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(2000.0\)</span>,</p></li>
+</ol>
 <div class="section" id="uq-workflow">
 <h2><span class="section-number">6.7.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
 <p>To define the uncertainty workflow in quoFEM, select <strong>Parameters Estimation</strong> for the <strong>Dakota Method Category</strong>, and enter the following inputs:</p>
@@ -233,7 +248,7 @@
 <h2><span class="section-number">6.7.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
 <p>The following files make up the <strong>FEM</strong> model definition.</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">frame/fem.tcl</span></code>: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> fils. As a consequence, no postprocessing script is needed. The values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span></code> computed and written to the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(m1,m2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">m2</span></code>) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/frame/fem.tcl">fem.tcl</a>: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> fils. As a consequence, no postprocessing script is needed. The values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span></code> computed and written to the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(m1,m2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">m2</span></code>) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
 </ol>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>

@@ -191,14 +191,25 @@
             
   <div class="section" id="optimization">
 <h1><span class="section-number">6.6. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem folder</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-06">quo-06</a></p></td>
+</tr>
+</tbody>
+</table>
 <p>In this example, a <strong>parameter estimation</strong> routine is used to solve a classical optimization problem for which an analytic solution is known.</p>
 <p>The Rosenbrock function is a <em>test function</em> that is often used to evaluate numerical optimization algorithms. It is given by the following expression:</p>
 <div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-06-0">
 <span class="eqno">(6.6.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-06-0" title="Permalink to this equation">¶</a></span>\[f(x, y)=(a-x)^{2}+b\left(y-x^{2}\right)^{2}\]</div>
 <p>The following parameters are defined in the <strong>RV</strong> tab of quoFEM:</p>
 <ol class="arabic simple">
-<li><p>First variable, <code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of -2.0, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 2.0,</p></li>
-<li><p>Second variable, <code class="docutils literal notranslate"><span class="pre">Y</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 1.4, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 1.6,</p></li>
+<li><p>First variable, <code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(-2.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(2.0\)</span>,</p></li>
+<li><p>Second variable, <code class="docutils literal notranslate"><span class="pre">Y</span></code>: <strong>Uniform</strong> distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(-2.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of <span class="math notranslate nohighlight">\(2.0\)</span>,</p></li>
 </ol>
 <div class="section" id="uq-workflow">
 <h2><span class="section-number">6.6.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
@@ -228,8 +239,8 @@
 <h2><span class="section-number">6.6.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
 <p>The following files make up the <strong>FEM</strong> model definition.</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rosenbrock/rosenbrock.py</span></code>: This file is a Python script which implements the Rosenbrock function. It is supplied to the <strong>Input Script</strong> field of the <strong>FEM</strong> tab. Because this file write directly to <code class="docutils literal notranslate"><span class="pre">results.out</span></code>, it obviates the need for supplying a <strong>Postprocess Script</strong>. When invoked in the workflow, the Python routine is supplied a set of random variable realizations through the star-import of the script supplied to the <strong>Parameters File</strong> field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rosenbrock/params.py</span></code>: This file is a Python script which defines the problem?s random variables as objects in the Python runtime. It is supplied to the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab. <em>The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.</em></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/rosenbrock.py">rosenbrock.py</a>: This file is a Python script which implements the Rosenbrock function. It is supplied to the <strong>Input Script</strong> field of the <strong>FEM</strong> tab. Because this file write directly to <code class="docutils literal notranslate"><span class="pre">results.out</span></code>, it obviates the need for supplying a <strong>Postprocess Script</strong>. When invoked in the workflow, the Python routine is supplied a set of random variable realizations through the star-import of the script supplied to the <strong>Parameters File</strong> field.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/params.py">params.py</a>: This file is a Python script which defines the problem?s random variables as objects in the Python runtime. It is supplied to the <strong>Parameters File</strong> field of the <strong>FEM</strong> tab. <em>The literal values which are assigned to variables in this file will be varied at runtime by the UQ engine.</em></p></li>
 </ol>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
