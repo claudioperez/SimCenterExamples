@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. Schemas &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6. Input File Schema &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -106,8 +106,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Schemas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#quofem-schema">6.1. quoFEM Schema</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Input File Schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uq-tab">6.1. UQ tab</a></li>
 </ul>
 </li>
 </ul>
@@ -155,7 +155,7 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>Schemas</li>
+      <li><span class="section-number">6. </span>Input File Schema</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,302 +174,265 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="schemas">
-<h1><span class="section-number">6. </span>Schemas<a class="headerlink" href="#schemas" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="quofem-schema">
-<h2><span class="section-number">6.1. </span>quoFEM Schema<a class="headerlink" href="#quofem-schema" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="input-file-schema">
+<h1><span class="section-number">6. </span>Input File Schema<a class="headerlink" href="#input-file-schema" title="Permalink to this headline">¶</a></h1>
+<p>Input files are JSON files that can be used to automatically populate the input fields of the interface. This section presents the schema for these files.</p>
+<div class="section" id="uq-tab">
+<h2><span class="section-number">6.1. </span>UQ tab<a class="headerlink" href="#uq-tab" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="5"><p>Schema for quoFEM <code class="docutils literal notranslate"><span class="pre">input.json</span></code> files.</p></td>
+<tr class="row-odd"><td colspan="4"><p>Inputs for the UQ tab.</p></td>
 </tr>
 <tr class="row-even"><td><p>type</p></td>
-<td colspan="4"><p><em>object</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="5"><p>properties</p></td>
-</tr>
-<tr class="row-even"><td rowspan="8"><ul class="simple">
-<li><p><strong>Applications</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
 <td colspan="3"><p><em>object</em></p></td>
 </tr>
 <tr class="row-odd"><td colspan="4"><p>properties</p></td>
 </tr>
-<tr class="row-even"><td rowspan="6"><ul class="simple">
-<li><p><strong>UQ</strong></p></li>
-</ul>
-</td>
-<td colspan="3"><p><em>UQ</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="3"><p>[incomplete desciption.]</p></td>
-</tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="2"><p><em>object</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="3"><p>properties</p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>Application</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>ApplicationData</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td><p><em>object</em></p></td>
-</tr>
-<tr class="row-even"><td rowspan="7"><ul class="simple">
-<li><p><strong>EDP</strong></p></li>
-</ul>
-</td>
-<td colspan="4"><p><em>QoI</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>Inputs for the EDP tab.</p></td>
-</tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="3"><p><em>array</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>items</p></td>
-</tr>
-<tr class="row-even"><td rowspan="3"><ul class="simple">
-<li></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>object</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="3"><p>properties</p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>name</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td rowspan="9"><ul class="simple">
-<li><p><strong>UQ_Method</strong></p></li>
-</ul>
-</td>
-<td colspan="4"><p><em>UQ</em></p></td>
-</tr>
-<tr class="row-even"><td colspan="4"><p>Inputs for the UQ tab.</p></td>
-</tr>
-<tr class="row-odd"><td><p>type</p></td>
-<td colspan="3"><p><em>object</em></p></td>
-</tr>
-<tr class="row-even"><td colspan="4"><p>properties</p></td>
-</tr>
-<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<tr class="row-even"><td rowspan="4"><ul class="simple">
 <li><p><strong>uqEngine</strong></p></li>
 </ul>
 </td>
 <td colspan="3"><p><em>UQ Engine</em></p></td>
 </tr>
+<tr class="row-odd"><td colspan="3"><p>UQ engine.</p></td>
+</tr>
 <tr class="row-even"><td><p>type</p></td>
 <td colspan="2"><p><em>string</em></p></td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<tr class="row-odd"><td><p>default</p></td>
+<td colspan="2"><p>Dakota</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
 <li><p><strong>uqType</strong></p></li>
 </ul>
 </td>
 <td colspan="3"><p><em>Dakota Method Category</em></p></td>
 </tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>additionalProperties</p></td>
-</tr>
-<tr class="row-even"><td rowspan="14"><ul class="simple">
-<li><p><strong>fem</strong></p></li>
-</ul>
-</td>
-<td colspan="4"><p><em>FEM</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>Inputs for the FEM tab.</p></td>
-</tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="3"><p><em>object</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>properties</p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>dir</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td rowspan="2"><ul class="simple">
-<li><p><strong>inputFile</strong></p></li>
-</ul>
-</td>
-<td colspan="3"><p><em>Input File</em></p></td>
-</tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>mainInput</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>mainPostprocessScript</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>numInputs</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>integer</em></p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>parametersFile</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>parametersScript</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>postprocessScript</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>program</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="2"><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td rowspan="2"><ul class="simple">
-<li><p><strong>localAppDir</strong></p></li>
-</ul>
-</td>
-<td colspan="4"><p>[incomplete]</p></td>
-</tr>
 <tr class="row-odd"><td><p>type</p></td>
-<td colspan="3"><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>python</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="3"><p><em>string</em></p></td>
-</tr>
-<tr class="row-odd"><td rowspan="12"><ul class="simple">
-<li><p><strong>randomVariables</strong></p></li>
-</ul>
-</td>
-<td colspan="4"><p><em>RV</em></p></td>
-</tr>
-<tr class="row-even"><td><p>type</p></td>
-<td colspan="3"><p><em>array</em></p></td>
-</tr>
-<tr class="row-odd"><td colspan="4"><p>items</p></td>
+<td colspan="2"><p><em>string</em></p></td>
 </tr>
 <tr class="row-even"><td rowspan="9"><ul class="simple">
-<li></li>
+<li><p>samplingMethodData</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="3"><p><em>Forward Propagation</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="2"><p><em>object</em></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>properties</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>method</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Method</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>samples</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Samples</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>integer</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>seed</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Seed</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>integer</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="15"><ul class="simple">
+<li><p>reliabilityMethodData</p></li>
+</ul>
+</td>
+<td colspan="3"><p><em>Reliability Analysis</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
 <td colspan="2"><p><em>object</em></p></td>
 </tr>
 <tr class="row-odd"><td colspan="3"><p>properties</p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>distribution</strong></p></li>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>integrationMethod</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="2"><p><em>Integration Method</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
 <td><p><em>string</em></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>name</strong></p></li>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>levelType</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="2"><p><em>Level Type</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
 <td><p><em>string</em></p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>refCount</strong></p></li>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>localMethod</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
-<td><p><em>integer</em></p></td>
+<td colspan="2"><p><em>Local Method</em></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p>stdDev</p></li>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>method</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="2"><p><em>Reliability Method</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>mpp_Method</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>MPP Search Method</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p>probabilityLevel</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Probability Levels</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p><em>array</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="15"><ul class="simple">
+<li><p>bayesianCalibrationMethodData</p></li>
+</ul>
+</td>
+<td colspan="3"><p><em>Inverse Problem</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="2"><p><em>object</em></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>properties</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>burnInSamples</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>No. Burn in Samples</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
 <td><p><em>number</em></p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>value</strong></p></li>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>chainSamples</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="2"><p><em>No. Chain Samples</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>chains</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>No. Chains</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>jumpStep</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Jump Step</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>method</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>DREAM</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
 <td><p><em>string</em></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>variableClass</strong></p></li>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>seed</p></li>
 </ul>
 </td>
-<td><p>type</p></td>
+<td colspan="2"><p><em>Seed</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><ul class="simple">
+<li><p>calibrationMethodData</p></li>
+</ul>
+</td>
+<td colspan="3"><p>Input data for <strong>Parameter Estimation</strong>.</p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td colspan="2"><p><em>object</em></p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>properties</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><ul class="simple">
+<li><p>convergenceTol</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Convergence Tol</em></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Convergence tolerance.</p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>factors</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Scaling Factors</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>maxIterations</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Max No. Iterations</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>number</em></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><ul class="simple">
+<li><p>method</p></li>
+</ul>
+</td>
+<td colspan="2"><p><em>Method</em></p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
 <td><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td colspan="3"><p>additionalProperties</p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>remoteAppDir</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="3"><p><em>string</em></p></td>
-</tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><strong>uqResults</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="3"><p><em>object</em></p></td>
-</tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><strong>workingDir</strong></p></li>
-</ul>
-</td>
-<td><p>type</p></td>
-<td colspan="3"><p><em>string</em></p></td>
 </tr>
 </tbody>
 </table>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.4. Sensitivity Analysis &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.5. Sensitivity Analysis &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="6.5. Non-structural problems with Python" href="quo-05.html" />
-    <link rel="prev" title="6.3. Reliability Analysis" href="quo-03.html" /> 
+    <link rel="next" title="6.6. Optimization" href="quo-06.html" />
+    <link rel="prev" title="6.4. Reliability Analysis" href="quo-03.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,15 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="quo-01.html">6.1. Forward Propagation - OpenSees/Tcl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.2. Forward Propagation - OpenSeesPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.3. Reliability Analysis</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. Sensitivity Analysis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#model-definition">6.4.1. Model Definition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#results">6.4.2. Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.1. Basic modeling with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-01.html">6.2. Forward Propagation - OpenSees/Tcl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.3. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.4. Reliability Analysis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.5. Sensitivity Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uq-workflow">6.5.1. UQ Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-files">6.5.2. Model Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">6.5.3. Results</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="quo-05.html">6.5. Non-structural problems with Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
@@ -121,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../schemas/schema.html">6. Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../schemas/schema.html">6. Input File Schema</a></li>
 </ul>
 
             
@@ -169,7 +170,7 @@
         
           <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
         
-      <li><span class="section-number">6.4. </span>Sensitivity Analysis</li>
+      <li><span class="section-number">6.5. </span>Sensitivity Analysis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -189,37 +190,50 @@
            <div itemprop="articleBody">
             
   <div class="section" id="sensitivity-analysis">
-<h1><span class="section-number">6.4. </span>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.5. </span>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Permalink to this headline">¶</a></h1>
 <p>This example uses quoFEM to perform a global sensitivity analysis of an OpenSees FE model.</p>
-<p>Consider a stochastic model of a two-dimensional truss structure like that shown in the following figure. A <a class="reference external" href="/common/user_manual/usage/desktop/DakotaSensitivity.html">sensitivity analysis</a> procedure is coordinated by quoFEM which will estimate the sensitivities of the response quantities of interest with respect to the problem?s random variables.</p>
-<div class="figure align-default">
-<img alt="../../../../../_images/truss1.png" src="../../../../../_images/truss1.png" />
+<p>Consider a stochastic model of a two-dimensional truss structure like that shown in the following figure. A <a class="reference external" href="/common/user_manual/usage/desktop/DakotaSensitivity.html">sensitivity analysis</a> procedure is coordinated by quoFEM which will estimate the sensitivities of the response quantities of interest with respect to the problem?s random variables.
+<a href="#id1"><span class="problematic" id="id2">|Truss schematic diagram|</span></a></p>
+<p>The following parameters are defined in the <strong>RV</strong> tab of quoFEM:</p>
+<ol class="arabic simple">
+<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: <strong>Weibull</strong> distribution with a scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of 210.0, shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of 20.0,</p></li>
+<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: <strong>Beta</strong> distribution with a first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of 2.0, second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of 2.0, lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 20.0, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 30.0,</p></li>
+<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: <strong>Lognormal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 250.0, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 50.0,</p></li>
+<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: <strong>Normal</strong> distribution with a mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 500.0, standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 100.0,</p></li>
+</ol>
+<div class="section" id="uq-workflow">
+<h2><span class="section-number">6.5.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
+<p>To define the uncertainty workflow in quoFEM, select <strong>Sensitivity Analysis</strong> for the <strong>Dakota Method Category</strong>, and enter the following inputs:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Method</strong></p></td>
+<td><p>LHS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Samples</strong></p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Seed</strong></p></td>
+<td><p>175</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>The following problem variables are modeled as uncertain parameters:</p>
+<div class="section" id="model-files">
+<h2><span class="section-number">6.5.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
+<p>The following files make up the <strong>FEM</strong> model definition.</p>
 <ol class="arabic simple">
-<li><p>Elastic modulus, <code class="docutils literal notranslate"><span class="pre">E</span></code>: Weibull distribution with a  scale parameter <span class="math notranslate nohighlight">\((\lambda)\)</span> of 210,  shape parameter <span class="math notranslate nohighlight">\((k)\)</span> of 20, .</p></li>
-<li><p>Load magnitude, <code class="docutils literal notranslate"><span class="pre">P</span></code>: Beta distribution with a  first shape parameter <span class="math notranslate nohighlight">\((\alpha)\)</span> of 2,  second shape parameter <span class="math notranslate nohighlight">\((\beta)\)</span> of 2,  lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of 20,  upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of 30, .</p></li>
-<li><p>Cross sectional area for the other six bars, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>: Lognormal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 250,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 50, .</p></li>
-<li><p>Cross sectional area for the upper three bars, <code class="docutils literal notranslate"><span class="pre">Au</span></code>: Normal distribution with a  mean <span class="math notranslate nohighlight">\((\mu)\)</span> of 500,  standard deviation <span class="math notranslate nohighlight">\((\sigma)\)</span> of 100, .</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/model.tcl</span></code>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem?s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truss/post.tcl</span></code>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <code class="docutils literal notranslate"><span class="pre">results.out</span></code> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
 </ol>
-<div class="section" id="model-definition">
-<h2><span class="section-number">6.4.1. </span>Model Definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h2>
-<p>The following input files must be placed in an <em>empty</em> folder:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truss/model.tcl</span></code>: This file is an OpenSees Tcl script that constructs and runs a finite element analysis of the truss for a given realization of the problem’s random variables. It is supplied to the <strong>Input File</strong> field of the <strong>FEM</strong> tab.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">truss/post.tcl</span></code>: This file is an OpenSees Tcl script that processes the QoI identifiers supplied in the <strong>QoI</strong> tab, and writes the relevant response quantities to <cite>results.out</cite> from an OpenSees process. It is supplied to the <strong>Postprocess File</strong> field of the <strong>FEM</strong> tab.</p></li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
 <p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
 </div>
-</div>
 <div class="section" id="results">
-<h2><span class="section-number">6.4.2. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.5.3. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
 <p>None</p>
-<div class="align-center figure">
-<img alt="common\user_manual\examples\desktop\quoFEM\None" src="common\user_manual\examples\desktop\quoFEM\None" />
-</div>
 </div>
 </div>
 
