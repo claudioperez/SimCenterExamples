@@ -1,0 +1,77 @@
+{
+  "Name": "Bookcase, 2 shelves, unanchored laterally",
+  "QuantityUnit": [
+    1,
+    "EA"
+  ],
+  "Directional": false,
+  "Correlated": false,
+  "EDP": {
+    "Type": "Peak Floor Acceleration",
+    "Unit": [
+      1,
+      "g"
+    ],
+    "Offset": 0
+  },
+  "GeneralInformation": {
+    "ID": "E2022.102a",
+    "Description": "Standard bookcase, unanchored laterally.  Bookcase is 12-5/8\" deep x 29\" tall. Median demand based on FEMA P58 Vol3 Background Documentation 3.9.12 A11 and an assumption of W/H = 0.43, dispersion is a generic 0.5. Repair cost and time assumes that only 10% of the bookcases will experience damage and the repair work mainly involves restacking the shelves.",
+    "Author": "Not Given",
+    "Official": true,
+    "DateCreated": "2019-02-19T17:52:33.4075518-08:00",
+    "Approved": true,
+    "Incomplete": false,
+    "Notes": " "
+  },
+  "Ratings": {
+    "DataQuality": "Not Rated",
+    "DataRelevance": "Not Rated",
+    "Documentation": "Not Rated",
+    "Rationality": "Not Rated"
+  },
+  "DSGroups": [
+    {
+      "MedianEDP": 0.78,
+      "Beta": 0.5,
+      "CurveType": "LogNormal",
+      "DSGroupType": "Single",
+      "DamageStates": [
+        {
+          "Weight": 1.0,
+          "LongLeadTime": false,
+          "Consequences": {
+            "ReconstructionCost": {
+              "Amount": [100.0, 100.0],
+              "Quantity": [
+                1.0,
+                1.0
+              ],
+              "CurveType": "Normal",
+              "Beta": 0.5,
+              "Bounds": [
+                0,
+                "None"
+              ]
+            },
+            "ReconstructionTime": {
+              "Amount": [0.1, 0.1],
+              "Quantity": [
+                1.0,
+                1.0
+              ],
+              "CurveType": "Normal",
+              "Beta": 0.5,
+              "Bounds": [
+                0,
+                "None"
+              ]
+            }
+          },
+          "Description": "Book case falls over and contents are scattered.  Likely damage to bookcase.  ",
+          "RepairMeasures": "Replace bookcase and restack / replace contents.  "
+        }
+      ]
+    }
+  ]
+}

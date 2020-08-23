@@ -1,10 +1,15 @@
-{% from "base.jinja" import schema_table, random_variables, list_files %}
+---
+page_template: vega.html
+...
+:page_template: vega.html
+
+{% from "base.jinja" import schema_table, random_variables, list_files, vega_plot %}
 
 # {{ page.title }}
 
 |  |  |
-|---|---|
-| Problem folder | [{{page.id}}](https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/{{page.id}}) |
+|----------|------|
+| Problem files | [{{page.id}}](https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/{{page.id}}) |
 
 {{page.docs.synopsis}}
 
@@ -39,3 +44,4 @@ The following files make up the **FEM** model definition.
 ## Results
 
 {{ page.docs.results }}
+{{ vega_plot(page) }}

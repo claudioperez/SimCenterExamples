@@ -1,0 +1,16 @@
+
+
+{% for item in page.context %}
+
+    {% if item is mapping %}
+
+        {% for k,v in item %}
+            {{ k|macro_lookup(v) }}
+        {% endfor %}
+
+    {% else %}
+        {{ item }}
+    {% endif %}
+
+{% endfor %}
+

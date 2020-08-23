@@ -37,8 +37,8 @@ UQ_METHOD:
     uqType: Parameters Estimation
   BAY_CAL:  &BAY_CAL
     bayesianCalibrationMethodData:
-      burnInSamples: 10
-      chainSamples: 40
+      burnInSamples: 1000
+      chainSamples: 4000
       chains: 4
       jumpStep: 5
       method: DREAM
@@ -169,7 +169,7 @@ FE_MODELS:
         value: RV.Y
         variableClass: Uncertain
 
-FILES:
+STATIC:
   truss:
     truss_model_py: &truss_model_py
       loc: truss/model.py
@@ -195,7 +195,13 @@ FILES:
     frame_model_tcl: &frame_model_tcl
       loc: frame/fem.tcl
       description: This file is an OpenSees Tcl script that defines a FE model for a given realization, runs an analysis, and creates a `results.out` file. As a consequence, no postprocessing script is needed. The values placed in `results.out` file are the difference between computed and observed values. Expressed another way, the function `f(Ic1,Ic2)` computed and written to the `results.out` file is `f(Ic1,Ic2) = ObservedPeriods - ComputedPeriods(Ic1,Ic2)`. The UQ algorithm when running is searching for values of the random variable parameters (`Ic1` and `Ic2`) that minimize this loss function. The user must take this fact into account when formulating the output from their own scripts for their own problems.
-    
+  
+  frame-02:
+    frame_02_model: 
+      loc: frame-02/fem.tcl
+
+
+
 ##############################################################################
 # quoFEM Examples
 ##############################################################################
@@ -208,7 +214,7 @@ quoFEM:
       statement: |
         Consider the problem of uncertainty quantification in a two-dimensional truss structure shown in the following figure. Two input scripts are used to define a forward propagation procedure to be coordinated by quoFEM which will estimate the mean and standard deviation of the vertical displacement at node 3 using Latin hypercube sampling.
 
-        ![Truss schematic diagram](truss/truss.png)
+        ![Truss schematic diagram](truss/truss.png){width="400"}
       rv: |
         The following parameters are defined in the **RV** tab:
       results:  |
@@ -434,7 +440,7 @@ quoFEM:
       statement: |
         Provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, this example looks at the following simplified finite element model of a steel building.
 
-        ![](frame/frameFE.png) \
+        ![Schematic model of frame.](frame/frameFE.png){style="float:right" width="300" align="center"}
         
         Each floor slab of the building is made of composite metal deck and is supported on four steel columns. The story heights are measured at $10'$ and in plan the side lengths measure $33'-4"$ by $30'$. Properties of the steel columns are taken deterministically  with an elastic modulus of $29,000 \mathrm{ksi}$, area of $110 \mathrm{in}^2$, and principal moment of inertial ($I_{yy}$) of $1190 \mathrm{ in}^4$. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid. The first two vibration periods of the structure are determined to be $0.19 sec$ and $0.09 sec$. 
 
@@ -447,8 +453,7 @@ quoFEM:
 
         Our goal will be to reobtain the original column moments of inertia from this data using a conventional calibration procedure.
       rv: |
-        The unknown quantities of interest are the moments of inertia for the first and second story columns (`Ic1` and `Ic2` respectively). Using the following bounds and initial estimates, these parameters are defined as follows in the **RV** tab of quoFEM:
-
+        The unknown quantities of interest are the moments of inertia for the first and second story columns (`Ic1` and `Ic2` respectively), on which we impose the the following bounds and initial estimates:
       results: |
         Once the analysis is complete the **RES** tab will be automatically selected and the results will be displayed as shown in the figure below. 
         
@@ -539,3 +544,165 @@ quoFEM:
         postprocessScript: ""
         program: FEAPpv
       UQ_Method:  {<<: *FWD_LHS}
+
+##############################################################################
+# EE-UQ Examples
+##############################################################################
+EEUQ:
+  - id: eeuq-01
+    title: Basic Shear Building Procedure
+    set: frame-chopra
+    files: [*frame_model_tcl]
+    description: In this example, the EE-UQ application is used to estimate means and standard deviations of a structural model's displacement response when subjected to earthquake excitations.
+    docs: ~
+    input: &eeuq-01
+      Applications:
+        EDP:
+          Application: StandardEarthquakeEDP
+          ApplicationData: {}
+        Events:
+          - Application: StochasticGroundMotion
+            ApplicationData:
+              modelName: VlachosSiteSpecificEQ
+              seed: 500
+            EventClassification: Earthquake
+        Modeling:
+          Application: MDOF_BuildingModel
+          ApplicationData: {}
+        Simulation:
+          Application: OpenSees-Simulation
+          ApplicationData: {}
+        UQ:
+          Application: Dakota-UQ1
+          ApplicationData: {}
+      EDP:
+        type: StandardEarthquakeEDP
+      Events:
+        - EventClassification: Earthquake
+          modelName: Vlachos et al. (2018)
+          momentMagnitude: 7
+          ruptureDist: 40
+          seed: 500
+          type: StochasticMotion
+          vs30: 500
+      GeneralInformation:
+        depth: 360
+        height: 432
+        location:
+          latitude: 37.8715
+          longitude: -122.273
+        name: ''
+        planArea: 129600
+        stories: 3
+        units:
+          force: kips
+          length: in
+          temperature: C
+          time: sec
+        width: 360
+      Simulation:
+        Application: OpenSees-Simulation
+        algorithm: Newton
+        analysis: Transient -numSubLevels 2 -numSubSteps 10
+        convergenceTest: NormUnbalance 1.0e-2 10
+        dampingModel: Rayleigh Damping
+        dampingRatio: 0.02
+        dampingRatioModal: 0.02
+        firstMode: 1
+        integration: Newmark 0.5 0.25
+        modalRayleighTangentRatio: 0
+        numModesModal: 1
+        rayleighTangent: Initial
+        secondMode: 0
+        solver: Umfpack
+      StructuralInformation:
+        Bx: 0.1
+        By: 0.1
+        Fyx: 1000000
+        Fyy: 1000000
+        Krz: 10000000000
+        Kx: RV.k
+        Ky: RV.k
+        ModelData:
+          - Fyx: 1000000
+            Fyy: 1000000
+            Ktheta: 10000000000
+            bx: 0.1
+            by: 0.1
+            height: 144
+            kx: RV.k
+            ky: RV.k
+            weight: RV.w
+          - Fyx: 1000000
+            Fyy: 1000000
+            Ktheta: 10000000000
+            bx: 0.1
+            by: 0.1
+            height: 144
+            kx: RV.k
+            ky: RV.k
+            weight: RV.w
+          - Fyx: 1000000
+            Fyy: 1000000
+            Ktheta: 10000000000
+            bx: 0.1
+            by: 0.1
+            height: 144
+            kx: RV.k
+            ky: RV.k
+            weight: RV.wR
+        height: 144
+        massX: 0
+        massY: 0
+        numStories: 3
+        randomVar: []
+        responseX: 0
+        responseY: 0
+        type: MDOF_BuildingModel
+        weight: RV.w
+      UQ_Method:
+        samplingMethodData:
+          method: LHS
+          samples: 100
+          seed: 53
+        uqEngine: Dakota
+        uqType: Forward Propagation
+      localAppDir: C:/Users/claud/SimCenter/EEUQ
+      randomVariables:
+        - distribution: Normal
+          mean: 100
+          name: w
+          refCount: 1
+          stdDev: 10
+          value: RV.w
+          variableClass: Uncertain
+        - distribution: Normal
+          mean: 325
+          name: k
+          refCount: 1
+          stdDev: 50
+          value: RV.k
+          variableClass: Uncertain
+        - distribution: Normal
+          mean: 50
+          name: wR
+          refCount: 1
+          stdDev: 5
+          value: RV.wR
+          variableClass: Uncertain
+      remoteAppDir: C:/Users/claud/SimCenter/EEUQ
+      runType: runningLocal
+      workingDir: C:/Users/claud/Documents/EE-UQ/LocalWorkDir
+
+
+ 
+##############################################################################
+# PBE Examples
+##############################################################################
+PBE:
+  - id: pbe-01
+    title: pbe-01
+    files: [*frame_model_tcl]
+    docs: ~
+    input:
+      <<: *eeuq-01

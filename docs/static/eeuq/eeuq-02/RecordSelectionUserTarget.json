@@ -1,0 +1,496 @@
+{
+    "Applications": {
+        "EDP": {
+            "Application": "StandardEarthquakeEDP",
+            "ApplicationData": {
+            }
+        },
+        "Events": [
+            {
+                "Application": "ExistingPEER_Events",
+                "ApplicationData": {
+                },
+                "EventClassification": "Earthquake",
+                "subtype": "PEER NGA Records"
+            }
+        ],
+        "Modeling": {
+            "Application": "MDOF_BuildingModel",
+            "ApplicationData": {
+            }
+        },
+        "Simulation": {
+            "Application": "OpenSees-Simulation",
+            "ApplicationData": {
+            }
+        },
+        "UQ": {
+            "Application": "Dakota-UQ1",
+            "ApplicationData": {
+            }
+        }
+    },
+    "EDP": {
+        "type": "StandardEarthquakeEDP"
+    },
+    "Events": [
+        {
+            "EventClassification": "Earthquake",
+            "Events": [
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 0.5954,
+                            "fileName": "RSN6_IMPVALL.I_I-ELC180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 0.5954,
+                            "fileName": "RSN6_IMPVALL.I_I-ELC270.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-6",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 2.3408,
+                            "fileName": "RSN12_KERN.PEL_PEL090.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 2.3408,
+                            "fileName": "RSN12_KERN.PEL_PEL180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-12",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 2.8656,
+                            "fileName": "RSN13_KERN_PAS180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 2.8656,
+                            "fileName": "RSN13_KERN_PAS270.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-13",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 1.5066,
+                            "fileName": "RSN14_KERN_SBA042.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 1.5066,
+                            "fileName": "RSN14_KERN_SBA132.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-14",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 0.9425,
+                            "fileName": "RSN15_KERN_TAF021.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 0.9425,
+                            "fileName": "RSN15_KERN_TAF111.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-15",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 0.791,
+                            "fileName": "RSN20_NCALIF.FH_H-FRN044.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 0.791,
+                            "fileName": "RSN20_NCALIF.FH_H-FRN314.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-20",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 2.9987,
+                            "fileName": "RSN22_ELALAMO_ELC180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 2.9987,
+                            "fileName": "RSN22_ELALAMO_ELC270.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-22",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 2.2866,
+                            "fileName": "RSN28_PARKF_C12050.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 2.2866,
+                            "fileName": "RSN28_PARKF_C12320.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-28",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 1.2686,
+                            "fileName": "RSN36_BORREGO_A-ELC180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 1.2686,
+                            "fileName": "RSN36_BORREGO_A-ELC270.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-36",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 10.0239,
+                            "fileName": "RSN37_BORREGO_A-PEL090.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 10.0239,
+                            "fileName": "RSN37_BORREGO_A-PEL180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-37",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 13.7966,
+                            "fileName": "RSN39_BORREGO_A-PAS180.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 13.7966,
+                            "fileName": "RSN39_BORREGO_A-PAS270.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-39",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 3.8129,
+                            "fileName": "RSN40_BORREGO_A-SON033.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 3.8129,
+                            "fileName": "RSN40_BORREGO_A-SON303.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-40",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 3.5991,
+                            "fileName": "RSN51_SFERN_PVE065.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 3.5991,
+                            "fileName": "RSN51_SFERN_PVE155.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-51",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 14.2247,
+                            "fileName": "RSN54_SFERN_BSF135.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 14.2247,
+                            "fileName": "RSN54_SFERN_BSF225.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-54",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 3.8764,
+                            "fileName": "RSN85_SFERN_SJC033.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 3.8764,
+                            "fileName": "RSN85_SFERN_SJC303.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-85",
+                    "type": "PeerEvent"
+                },
+                {
+                    "EventClassification": "Earthquake",
+                    "Records": [
+                        {
+                            "dirn": 1,
+                            "factor": 8.1786,
+                            "fileName": "RSN86_SFERN_SON033.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        },
+                        {
+                            "dirn": 2,
+                            "factor": 8.1786,
+                            "fileName": "RSN86_SFERN_SON303.AT2",
+                            "filePath": "C:/Users/el7ad/AppData/Local/Temp.dXjgIo"
+                        }
+                    ],
+                    "name": "PEER-Record-86",
+                    "type": "PeerEvent"
+                }
+            ],
+            "TargetSpectrum": {
+                "SpectrumType": "User Specified",
+                "UserSpectrum": [
+                    [
+                        0.01,
+                        0.2
+                    ],
+                    [
+                        0.1,
+                        0.3
+                    ],
+                    [
+                        1,
+                        0.4
+                    ],
+                    [
+                        5,
+                        0.05
+                    ],
+                    [
+                        10,
+                        0.01
+                    ]
+                ]
+            },
+            "components": "Two (Horizontal)",
+            "distanceMax": "50.0",
+            "distanceMin": "0.0",
+            "distanceRange": false,
+            "magnitudeMax": "8.0",
+            "magnitudeMin": "5.0",
+            "magnitudeRange": false,
+            "records": "16",
+            "type": "ExistingPEER_Events",
+            "vs30Max": "300.0",
+            "vs30Min": "150",
+            "vs30Range": false
+        }
+    ],
+    "GeneralInformation": {
+        "depth": 360,
+        "height": 432,
+        "location": {
+            "latitude": 37.8716,
+            "longitude": -124.272
+        },
+        "name": "",
+        "planArea": 129600,
+        "stories": 3,
+        "units": {
+            "force": "kips",
+            "length": "in",
+            "temperature": "C",
+            "time": "sec"
+        },
+        "width": 360
+    },
+    "Simulation": {
+        "Application": "OpenSees-Simulation",
+        "algorithm": "Newton",
+        "analysis": "Transient -numSubLevels 2 -numSubSteps 10",
+        "convergenceTest": "NormUnbalance 1.0e-2 10",
+        "dampingModel": "Rayleigh Damping",
+        "dampingRatio": 0.02,
+        "dampingRatioModal": 0.02,
+        "firstMode": 1,
+        "integration": "Newmark 0.5 0.25",
+        "modalRayleighTangentRatio": 0,
+        "numModesModal": 1,
+        "rayleighTangent": "Initial",
+        "secondMode": 0,
+        "solver": "Umfpack"
+    },
+    "StructuralInformation": {
+        "Bx": 0.1,
+        "By": 0.1,
+        "Fyx": 1000000,
+        "Fyy": 1000000,
+        "Krz": 10000000000,
+        "Kx": 100,
+        "Ky": 100,
+        "ModelData": [
+            {
+                "Fyx": 1000000,
+                "Fyy": 1000000,
+                "Ktheta": 10000000000,
+                "bx": 0.1,
+                "by": 0.1,
+                "height": 144,
+                "kx": 100,
+                "ky": 100,
+                "weight": "RV.w"
+            },
+            {
+                "Fyx": 1000000,
+                "Fyy": 1000000,
+                "Ktheta": 10000000000,
+                "bx": 0.1,
+                "by": 0.1,
+                "height": 144,
+                "kx": 100,
+                "ky": 100,
+                "weight": "RV.w"
+            },
+            {
+                "Fyx": 1000000,
+                "Fyy": 1000000,
+                "Ktheta": 10000000000,
+                "bx": 0.1,
+                "by": 0.1,
+                "height": 144,
+                "kx": 100,
+                "ky": 100,
+                "weight": "RV.w"
+            }
+        ],
+        "height": 144,
+        "massX": 0,
+        "massY": 0,
+        "numStories": 3,
+        "randomVar": [
+        ],
+        "responseX": 0,
+        "responseY": 0,
+        "type": "MDOF_BuildingModel",
+        "weight": "RV.w"
+    },
+    "UQ_Method": {
+        "samplingMethodData": {
+            "method": "LHS",
+            "samples": 100,
+            "seed": 387
+        },
+        "uqEngine": "Dakota",
+        "uqType": "Forward Propagation"
+    },
+    "localAppDir": "C:/SandBox/NHERI/2.1.0/EEUQ",
+    "randomVariables": [
+        {
+            "distribution": "Normal",
+            "mean": 250,
+            "name": "w",
+            "refCount": 1,
+            "stdDev": 5,
+            "value": "RV.w",
+            "variableClass": "Uncertain"
+        }
+    ],
+    "remoteAppDir": "C:/SandBox/NHERI/2.1.0/EEUQ",
+    "runType": "runningLocal",
+    "workingDir": "C:/Users/el7ad/Documents/EE-UQ/LocalWorkDir"
+}

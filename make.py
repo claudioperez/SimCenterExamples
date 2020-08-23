@@ -7,24 +7,24 @@ from distutils.dir_util import copy_tree
 # from subprocess import Popen, PIPE, STDOUT
 
 import jinja2
-from ruamel_yaml import YAML
+from ruamel.yaml import YAML
 
 
 yaml=YAML(typ='rt')
 
 
-
 # _BUILD_DIR = '..\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
-_BUILD_DIR = 'C:\\Users\\claud\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
+# _BUILD_DIR = 'C:\\Users\\claud\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\examples\\desktop'
+_BUILD_DIR = '_build/'
 
-# SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json").read()
-# schema = json.loads(SCHEMA)
-# RV_SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/RV_Schema.json").read()
-# rv_schema = json.loads(RV_SCHEMA)
+SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json").read()
+schema = json.loads(SCHEMA)
+RV_SCHEMA = urllib.request.urlopen("https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/RV_Schema.json").read()
+rv_schema = json.loads(RV_SCHEMA)
 
-sdir = "C:\\Users\\claud\\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\schemas\\"
-with open(sdir + "quoFEM_Schema.json") as f : schema = json.load(f)
-with open(sdir + "RV_Schema.json") as f : rv_schema = json.load(f)
+# sdir = "C:\\Users\\claud\\depot\\sim\\SimCenterDocumentation\\docs\\common\\user_manual\\schemas\\"
+# with open(sdir + "quoFEM_Schema.json") as f : schema = json.load(f)
+# with open(sdir + "RV_Schema.json") as f : rv_schema = json.load(f)
 
 
 FILE_VARS = {
@@ -35,7 +35,8 @@ FILE_VARS = {
 }
 
 def _pandoc(inputs: str, t: str):
-    arguments = ['pandoc', '-f', 'markdown', '-t', t]
+    #  -f html-native_divs+raw_html
+    arguments = ['pandoc', '-f', 'markdown-native_divs+raw_html', '-t', t]
     p = subprocess.Popen(
             arguments,
             stdin=subprocess.PIPE,
@@ -45,10 +46,13 @@ def _pandoc(inputs: str, t: str):
     return p.communicate(inputs)[0]
 
 
+@jinja2.contextfilter
+def call_macro_by_name(context, macro_name, *args, **kwargs):
+    """https://stackoverflow.com/questions/10629838/how-can-i-indirectly-call-a-macro-in-a-jinja2-template"""
+    return context.vars[macro_name](*args, **kwargs)
 
-# def tab_titles(dic):
-#     for k, v in schema.items():
-#         if 'title' in v: dic[k] = dic.pop(v['title'])
+
+
 def schemaTable(input,schema):
     out=[]
     for Prop in schema['options']:
@@ -89,15 +93,17 @@ def make_doc(ex: dict, folder: str, template='example.md', ext = '.rst'):
     - copy content from static/ to _build/{{folder}}/
     """
     # create output directory and file
-    filename = os.path.join(_BUILD_DIR, folder + '\\' + ex['id'] + ext)
+    filename = os.path.join(_BUILD_DIR, folder , ex['id'] + ext)
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
     # load jinja template
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, 'templates')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
+
     env.filters['schemaTable'] = schemaTable
     env.filters['basename'] = lambda path: os.path.basename(path)
+    
     tm = env.get_template(template)
     
     try: ex['rvars'] = rv_filter(ex['input']['randomVariables'])
@@ -105,9 +111,11 @@ def make_doc(ex: dict, folder: str, template='example.md', ext = '.rst'):
 
     page = tm.render(page=ex)
     # _md2rst(ex) # convert docstrings from md to rst
-    
-    with open(filename , 'w', encoding="UTF-8") as f: f.write(_pandoc(page, 'rst'))
-    copy_tree( 'static', _BUILD_DIR + '\\' + folder )
+    readme = os.path.join(_BUILD_DIR , folder ,'src', ex['id'],'README.md')
+    os.makedirs(os.path.dirname(readme), exist_ok=True)
+    with open(readme, 'w+') as f: f.write(page)
+    with open(filename , 'w', encoding="UTF-8") as f: f.write( _pandoc(page, 'rst') )
+    copy_tree( 'static', os.path.join(_BUILD_DIR , folder) )
 
 
 def make_dir(ex, folder, filter = lambda x: x):
@@ -115,7 +123,7 @@ def make_dir(ex, folder, filter = lambda x: x):
 
     - create _build/{{ folder }}/src/
     """
-    # Create input.json file
+    # Create input.json file for example
     build_path = os.path.join(_BUILD_DIR, folder, 'src', ex['id'])
     filename = os.path.join(build_path, 'input.json')
     os.makedirs(os.path.dirname(filename), exist_ok=True)

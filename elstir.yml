@@ -1,0 +1,13 @@
+site_name: Examples
+
+
+theme:
+  name: berkeley
+
+markdown_extensions:
+  - mdx_math:
+      enable_dollar_delimiter: true
+
+
+extra_templates: []
+
