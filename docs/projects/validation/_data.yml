@@ -1,0 +1,72 @@
+---
+- key: greenIdentificationModelError2018
+  title: On the Identiﬁcation of Model Error through Observations of Time-varying Parameters
+  abstract: When performing system identification, it can be possible to realise a deficient model (i.e. one that will make low fidelity predictions) that is able to closely represent a set of training data. For example, the parameters of linear dynamical models can often be tuned to realise a close match to training data that was generated from a system with strong nonlinearities. Despite this close match to available data, these same models may make very poor-quality predictions when shifted even slightly from the 'validation domain' (which could, for example, be a specific time window). In this paper we investigate the hypothesis that, by treating our model's parameters as being time-varying, we can identify key weaknesses in a model that would have been difficult to establish using other identification methods that do not consider the potentially time-varying nature of the model's parameters. Specifically, we use an Extended Kalman Filter to 'track' the parameters of a dynamical system, as a time history of training data is analysed. We then illustrate that this approach can reveal important information about the potential deficiencies of a model.
+
+- key: biUncertaintyQuantificationMetrics2017
+  title: Uncertainty Quantification Metrics with Varying Statistical Information in Model Calibration and Validation
+  abstract: |
+    Test-analysis comparison metrics are mathematical functions that provide a quantitative measure of the agreement (or lack thereof) between numerical predictions and experimental measurements. While calibrating and validating models, the choice of a metric can significantly influence the outcome, yet the published research discussing the role of metrics, in particular, varying levels of statistical information the metrics can contain, has been limited. This paper calibrates and validates the model predictions using alternative metrics formulated based on three types of distance based
+    criteria: 
+    
+    1. Euclidian distance (i.e., the absolute geometric distance between two points), 2. Mahalanobis distance (i.e., the weighted distance that considers the correlations of two point clouds), and 
+    3. Bhattacharyya distance (i.e., the statistical distance between two point clouds considering their probabilistic distributions). 
+    
+    A comparative study is presented in the first case study, where the influence of various metrics, and the varying levels of statistical information they contain, on the predictions of the calibrated models is evaluated. In the second case study, an integrated application of the distance metrics is demonstrated through a cross-validation process with regard to the measurement variability.
+  contents:
+    - 'II. Mathematical Formulations'
+    - 'III. Case Study 1: Comparative Application in Parameter Calibration'
+    - 'IV. Case Study 2: Validation with Regard toMeasurement Uncertainties'
+
+- key: atamturkturEmpiricallyImprovingModel2017
+  title: Empirically Improving Model Adequacy in Scientific Computing
+  synopsis: |
+    This paper presents a "model calibration approach", and suggests various metrics to assess the discrepancy between a model and a set of test data.
+  notes:
+    - Presents a "model calibration approach"
+    - 'this study demonstrates a two-way interaction in which theoretical knowledge is in turn informed by experimental data fitting.'
+  example-structure: |
+    given model f: x, p -> y, 
+  similar: [zsarnoczayUsingModelError2020a]
+  audience: 'model developers'
+  abstract: |
+    In developing mechanistic models, we establish assumptions regarding aspects of the system behavior that are not fully understood. Such assumptions in turn may lead to a simplified representation or omission of some underlying phenomena. Although necessary for feasibility, such simplifications introduce systematic bias in the model predictions. 
+    
+    Often times model bias is non-uniform across the operational domain of the system of interest. This operational domain is defined by the control parameters, i.e., those that can be controlled by experimentalists during observations of the system behavior. The conventional approach for addressing model bias involves empirically inferring a **functional representation of the discrepancy with respect to control parameters** and accordingly bias-correcting model predictions. This conventional process can be considered as experimental data fitting informed by theoretical knowledge, only providing a one-way interaction between simulation and observation. 
+    
+    **The model calibration approach** presented herein recognizes that assumptions established during model development may require omission or simplification of interactions among model input parameters. When prediction accuracy relies on the inclusion of these interactions, it becomes necessary to infer the functional relationships between the input parameters from experiments. As such, this study demonstrates a two-way interaction in which theoretical knowledge is in turn informed by experimental data fitting.
+    
+    We propose to empirically learn previously unknown parameter interactions through the training of functions emulating these relationships. Such interactions can be posed in the form of reliance of model input parameter values on control parameter settings or on other input parameters. If the nature of the interactions is known, appropriate parametric functions may be implemented. Otherwise, nonparametric emulator functions can be leveraged.
+    
+    In our study, we use nonparametric Gaussian Process models in the Bayesian paradigm to infer the interactions among input parameters from the experimental data. The proposed approach will equip **model developers** with a tool capable of identifying the underlying and mechanistically-relevant physical processes absent from engineering models. This approach has the potential to not only significantly reduce the systematic bias between model predictions and experimental observations, but also further engineers' knowledge of the physics principles governing complex systems.
+  conclusions:
+    - |
+      "Based on the preceding analysis, a general guideline on metric selection during model calibration is proposed as follows:
+      
+      1) In case of single experimental measurement, only metric ED is feasible among the preceding five metrics. A single set of parameter values is obtained through a deterministic calibration without any statistical treatment. 
+      
+      2) When multiple measurements are available, either deterministic or stochastic calibration is applicable depending on the practical requirement. 
+
+        1. If only parameter means are demanded, metrics ED and MD-1 are proposed for deterministic calibration. Being simple and intuitive, the classical metric ED is the first recommendation for this case. Metric MD-1 is the weighted geometric distance and it is sensitive to slight changes in the test variance (e.g., measurement errors). Consequently, it is proposed in certain applications [28,30] to check the stability of the calibrated results. 
+
+        2. A stochastic calibration is necessary when both parameter means and variances are demanded. Metric MD-2 considered herein is not recommended because it can only change, not calibrate, the variance. Metric BD is a more comprehensive metric with a higher level of statistical information. It contains the probability distribution information of two samples, and hence the calibrated sample has a more similar distribution with the target sample. However, the calibration precision on the means is smaller than the Euclidian distance. The classical Euclidian distance together with measurement means should be the primary consideration even in stochastic calibration processes. Metric ED-BD is consequently proposed as the first choice because of its global advantages."
+
+- key: hemezDefiningPredictiveMaturity2010
+  title: Defining predictive maturity for validated numerical simulations
+  synopsis: | 
+    This paper proposes a formula for computing a "predictive maturity index" that indicates a model's ability to deliver accurate predictions over a domain of applicability. An example is presented for a material model. Computing this index requires: 
+    - the availability of test data,
+    - "Expert judgement" for the selection of weighting coefficients
+    - Knowledge of the "characteristic number of calibration variables" that one would expect to encounter in a class of similar models or codes.
+  notes:
+    - "predictive maturity: A model's ability to deliver accurate predictions over a domain of applicability."
+    - 'The assessment of predictive maturity must go beyond the goodness-of-fit of the model to the available test data. We firmly believe that predictive maturity must also consider the "knob" or ancillary variables, used to calibrate the model and the degree to which physical experiments cover the domain of applicability.'
+    - '$$\operatorname{PMI}\left(\delta_{\mathrm{S}} ; N_{\mathrm{K}} ; \eta_{\mathrm{C}}\right)=\eta_{\mathrm{C}} \times\left(\frac{N_{\mathrm{R}}}{N_{\mathrm{K}}}\right)^{\gamma_{1}} \times\left(1-\delta_{\mathrm{S}}\right)^{\gamma_{2}} \times e^{\left(1-\eta_{\mathrm{C}}^{2}\right)^{\gamma_{3}}-\delta_{S}^{2}}$$'
+  example:
+    - After performing a sufficient number of MCMC iterations, selected to be 10,000 here, statistics of calibration variables visited are computed to estimate the (unknown) joint probability distribution.
+    - An orthogonal Latin Hypercube Sample (LHS) using a number of runs equal to 10 times the number of control parameters and calibration variables is analyzed.
+    - For each one of these runs, the PTW model is evaluated using a given combination of control parameters (de/dt; T) and calibration variables (h; j; c; s0; s1; y0; y1), and the corresponding strain-stress curve is predicted.
+  abstract: |
+    The increasing reliance on computer simulations in decision-making motivates the need to formulate a commonly accepted definition for "predictive maturity." The concept of predictive maturity involves quantitative metrics that could prove useful while allocating resources for physical testing and code development. Such metrics should be able to track progress (or lack thereof) as additional knowledge becomes available and is integrated into the simulations for example, through the addition of new experimental datasets during model calibration, and/or through the implementation of better physics models in the codes. This publication contributes to a discussion of attributes that a metric of predictive maturity should exhibit. It is contended that the assessment of predictive maturity must go beyond the goodness-of-fit of the model to the available test data. We firmly believe that predictive maturity must also consider the "knobs," or ancillary variables, used to calibrate the model and the degree to which physical experiments cover the domain of applicability. The emphasis herein is placed on translating the proposed attributes into mathematical properties, such as the degree of regularity and asymptotic limits of the maturity function. Altogether these mathematical properties define a set of constraints that the predictive maturity function must satisfy. Based on these constraints, we propose a Predictive Maturity Index (PMI). 
+    Physical datasets are used to illustrate how the PMI quantifies the maturity of the non-linear, Preston- Tonks-Wallace model of plastic deformation applied to beryllium, a light-weight, high-strength metal. The question "does collecting additional data improve predictive power?" is answered by computing the PMI iteratively as additional experimental datasets become available. The results obtained reflect that coverage of the validation domain is as important to predictive maturity as goodness-of-fit. The example treated also indicates that the stabilization of predictive maturity can be observed, provided that enough physical experiments are available.
+...
